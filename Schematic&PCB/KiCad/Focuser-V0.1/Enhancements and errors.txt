@@ -1,0 +1,15 @@
+Label for the correct insertion of the motor driver circuit
+
+
+ERRORS:
+
+1. 10K missing resistor between Enable pin of the motor driver and Vcc (5V)
+
+
+For manual control use either a mini joystick (GND, VCC, VRX, VRY, SW) or an encoder (GND, VCC, SW, CLK, DT) - 3 pins
+
+RS485 adapter (for Modbus protocol) 3 pins (Rx, Tx, Enable).
+
+Micro display (I2C or SPI) max 4 pins
+
+Motor current sensor - 1 analog pin

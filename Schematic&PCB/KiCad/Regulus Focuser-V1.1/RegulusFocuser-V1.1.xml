@@ -1,0 +1,1317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>D:\_Documents-s\Projects\ElectronicFocuser\Schematic&amp;PCB\KiCad\Regulus Focuser-V1.1\RegulusFocuser-V1.1.kicad_sch</source>
+    <date>7/11/2022 12:01:12 PM</date>
+    <tool>Eeschema (6.0.6)</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Regulus Electronic Focuser v1</title>
+        <company>Radmilo Felix 2022</company>
+        <rev/>
+        <date>2022-02-07</date>
+        <source>RegulusFocuser-V1.1.kicad_sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="BZ1">
+      <value>Buzzer</value>
+      <footprint>MyCustom:Buzzer-HSD-4pin</footprint>
+      <libsource lib="Device" part="Buzzer" description="Buzzer, polarized"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7b4ce615-f0d5-4b1f-9b49-d02fdef0cf8b</tstamps>
+    </comp>
+    <comp ref="C1">
+      <value>100n</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="LCSC">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="LCSC" value="C49678"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f380980f-80e9-4fe6-a486-6feb2904a0eb</tstamps>
+    </comp>
+    <comp ref="C2">
+      <value>4.7u</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="LCSC">C1779</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="LCSC" value="C1779"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c20e9996-fd42-4554-89c0-cbf14af59c98</tstamps>
+    </comp>
+    <comp ref="C3">
+      <value>47p</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="LCSC">C14857</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="LCSC" value="C14857"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>be5e776c-d432-4d1d-9372-2e1aee3b24de</tstamps>
+    </comp>
+    <comp ref="C4">
+      <value>47p</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="LCSC">C14857</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="LCSC" value="C14857"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>47957a49-780a-4ad3-b93b-120dab3c7819</tstamps>
+    </comp>
+    <comp ref="C5">
+      <value>100n</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="LCSC">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="LCSC" value="C49678"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>90a410bd-d3d9-422e-9b20-06e5c6622c52</tstamps>
+    </comp>
+    <comp ref="C6">
+      <value>100n</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="LCSC">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="LCSC" value="C49678"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4da6302c-cd1f-4909-89d2-621a3bbeb204</tstamps>
+    </comp>
+    <comp ref="C7">
+      <value>10u</value>
+      <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-21_Kemet-B</footprint>
+      <fields>
+        <field name="LCSC">C140404</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="LCSC" value="C140404"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>15ac6ca2-8d6d-4f7f-8d3b-a3e2b642d350</tstamps>
+    </comp>
+    <comp ref="C8">
+      <value>2.2u</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="LCSC">C49217</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="LCSC" value="C49217"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ffc879cf-80c5-4996-ba12-cf3a1f446940</tstamps>
+    </comp>
+    <comp ref="C9">
+      <value>10u</value>
+      <footprint>Capacitor_Tantalum_SMD:CP_EIA-3528-21_Kemet-B</footprint>
+      <fields>
+        <field name="LCSC">C140404</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="LCSC" value="C140404"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>708230f4-d238-4d3b-810a-8a36cad1b420</tstamps>
+    </comp>
+    <comp ref="C10">
+      <value>100n</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <fields>
+        <field name="LCSC">C49678</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="LCSC" value="C49678"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0eb2cc03-cdd6-4d96-a6fa-80e0479b8bbb</tstamps>
+    </comp>
+    <comp ref="D1">
+      <value>LED</value>
+      <footprint>LED_SMD:LED_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C84270</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="LCSC" value="C84270"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d7ce504d-72d8-477a-affa-d918e485335f</tstamps>
+    </comp>
+    <comp ref="D2">
+      <value>LED Blue</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <fields>
+        <field name="LCSC">C84266</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="LCSC" value="C84266"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ffe10fb2-8400-4495-ae3b-0db4cc7c49ae</tstamps>
+    </comp>
+    <comp ref="D3">
+      <value>LED Red</value>
+      <footprint>LED_SMD:LED_0603_1608Metric</footprint>
+      <fields>
+        <field name="LCSC">C2286</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="LCSC" value="C2286"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>abef84d4-8437-4b3f-b090-1ae6f52a64e3</tstamps>
+    </comp>
+    <comp ref="J1">
+      <value>USB_A</value>
+      <footprint>Connector_USB:USB_B_Lumberg_2411_02_Horizontal</footprint>
+      <datasheet> ~</datasheet>
+      <libsource lib="Connector" part="USB_B" description="USB Type B connector"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0933cdb0-ad9c-41f7-9da7-3896d0e406e6</tstamps>
+    </comp>
+    <comp ref="J2">
+      <value>Display&amp;Encoder</value>
+      <footprint>Connector_RJ:RJ45_Amphenol_54602-x08_Horizontal</footprint>
+      <libsource lib="Connector" part="RJ45" description="RJ connector, 8P8C (8 positions 8 connected)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>075bd541-a5f1-4000-8ae9-996cb2ea954f</tstamps>
+    </comp>
+    <comp ref="J3">
+      <value>Serial1</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x03" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>51266cb1-bd84-4356-b0b6-ca271a846036</tstamps>
+    </comp>
+    <comp ref="J4">
+      <value>R-Connect</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8d96e49b-830f-48b4-a7a4-625adb5aae21</tstamps>
+    </comp>
+    <comp ref="J5">
+      <value>MotorPower</value>
+      <footprint>MyCustom:TerminalBlock_PTR_AKZ950-2_P5.08mm_Vertical</footprint>
+      <libsource lib="Connector" part="Screw_Terminal_01x02" description="Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b1dffbae-dc50-474c-b1cb-92899be9ca7a</tstamps>
+    </comp>
+    <comp ref="J6">
+      <value>MotorConnector</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x04" description="Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b0dba969-928a-4833-9b2a-41cb9b436888</tstamps>
+    </comp>
+    <comp ref="J7">
+      <value>5V-Ext</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5ebf797c-9040-4fa8-8bb7-199e05a9bd47</tstamps>
+    </comp>
+    <comp ref="J8">
+      <value>LimiterSW</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8385b95d-6b99-4dcf-a51f-c892e4cb3fe0</tstamps>
+    </comp>
+    <comp ref="J9">
+      <value>ResetSW</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
+      <libsource lib="Connector_Generic" part="Conn_01x02" description="Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>74bd2e89-b002-4a56-969f-ce4061d45509</tstamps>
+    </comp>
+    <comp ref="MC1">
+      <value>STM32F103C8T6-board</value>
+      <footprint>MyCustom:STM32F103C8T6</footprint>
+      <libsource lib="MyCustom" part="STM32F103C8T6-board" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>098e965b-817f-40dc-aa5a-18e6a23d2736</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>1k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C136873</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C136873"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>68ad7d35-2249-402f-9c7c-3d9a4e20c6aa</tstamps>
+    </comp>
+    <comp ref="R2">
+      <value>2.2k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C325909</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C325909"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>39bea9ce-f4fd-47b5-bcc4-488b64e31c3c</tstamps>
+    </comp>
+    <comp ref="R3">
+      <value>2.2k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C325909</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C325909"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>df231d9e-0c44-426c-8763-89babb1ca3da</tstamps>
+    </comp>
+    <comp ref="R4">
+      <value>120</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C175512</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C175512"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>20f86032-2ca7-4d85-9342-2ec7dd95b228</tstamps>
+    </comp>
+    <comp ref="R5">
+      <value>20k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C18003</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C18003"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7856fd3e-7cb2-4617-9f08-e93b38475b94</tstamps>
+    </comp>
+    <comp ref="R6">
+      <value>20k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C18003</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C18003"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f78d2d90-68bc-4c20-bfb3-6426e74fa17f</tstamps>
+    </comp>
+    <comp ref="R7">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C269766</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C269766"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c6755a81-7c14-4c1b-9e7c-b1323e38f892</tstamps>
+    </comp>
+    <comp ref="R8">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C269766</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C269766"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>394ee05a-f63c-4046-8f7d-aa3eeeff066d</tstamps>
+    </comp>
+    <comp ref="R9">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C269766</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C269766"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>23d6215c-5ccd-448a-9dca-fb24b263b819</tstamps>
+    </comp>
+    <comp ref="R10">
+      <value>270</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C25366</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C25366"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bfc5d266-0035-4d32-8c68-985d0c6dbbd9</tstamps>
+    </comp>
+    <comp ref="R11">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C269766</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C269766"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>45a58a3c-0ae3-4319-9136-f718ae1af278</tstamps>
+    </comp>
+    <comp ref="R12">
+      <value>270</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C25366</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C25366"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>03d7cab9-10d5-4c76-868e-82ff7b261811</tstamps>
+    </comp>
+    <comp ref="R13">
+      <value>120</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C175512</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C175512"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c475e457-db65-419e-b338-856cbb04bf0b</tstamps>
+    </comp>
+    <comp ref="R14">
+      <value>270</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C25366</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C25366"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>56da0f13-f3fd-45be-9b53-d50461ae38bf</tstamps>
+    </comp>
+    <comp ref="R15">
+      <value>270</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C25366</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C25366"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2d0fa45a-5ed6-4ac9-be5f-44775d269764</tstamps>
+    </comp>
+    <comp ref="R16">
+      <value>5k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C327044</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C327044"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fc1365ea-5161-4abb-963d-4a550e8a6a97</tstamps>
+    </comp>
+    <comp ref="R17">
+      <value>5k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C327044</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C327044"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c5de5d93-71b2-4096-b7aa-9aaf74fdbf46</tstamps>
+    </comp>
+    <comp ref="R18">
+      <value>5k</value>
+      <footprint>Resistor_SMD:R_1206_3216Metric</footprint>
+      <fields>
+        <field name="LCSC">C327044</field>
+      </fields>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <property name="LCSC" value="C327044"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>14f3287f-87b1-4cb7-8841-91f9a9268fe8</tstamps>
+    </comp>
+    <comp ref="U1">
+      <value>FT232RL</value>
+      <footprint>Package_SO:SSOP-28_5.3x10.2mm_P0.65mm</footprint>
+      <datasheet>https://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_FT232R.pdf</datasheet>
+      <fields>
+        <field name="LCSC">C8690</field>
+      </fields>
+      <libsource lib="Interface_USB" part="FT232RL" description="USB to Serial Interface, SSOP-28"/>
+      <property name="LCSC" value="C8690"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ddb2abe3-cf38-486e-b7d8-33b4ea486987</tstamps>
+    </comp>
+    <comp ref="U2">
+      <value>MAX485E</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <datasheet>https://datasheets.maximintegrated.com/en/ds/MAX1487E-MAX491E.pdf</datasheet>
+      <fields>
+        <field name="LCSC">C19738</field>
+      </fields>
+      <libsource lib="Interface_UART" part="MAX485E" description="Half duplex RS-485/RS-422, 2.5 Mbps, ±15kV electro-static discharge (ESD) protection, no slew-rate, no low-power shutdown, with receiver/driver enable, 32 receiver drive kapacitity, DIP-8 and SOIC-8"/>
+      <property name="LCSC" value="C19738"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fd355cf0-3197-4532-afba-ec8717897bfb</tstamps>
+    </comp>
+    <comp ref="U3">
+      <value>LogicLevelShifter-Bidirectional-4Signals-board</value>
+      <footprint>MyCustom:LogicLevelShifter_Bidirectional_4Signals</footprint>
+      <libsource lib="MyCustom" part="LogicLevelShifter-Bidirectional-4Signals-board" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>41718ce8-350c-4661-bf52-82eafef43695</tstamps>
+    </comp>
+    <comp ref="U4">
+      <value>MAX485E</value>
+      <footprint>Package_SO:SOIC-8_3.9x4.9mm_P1.27mm</footprint>
+      <datasheet>https://datasheets.maximintegrated.com/en/ds/MAX1487E-MAX491E.pdf</datasheet>
+      <fields>
+        <field name="LCSC">C19738</field>
+      </fields>
+      <libsource lib="Interface_UART" part="MAX485E" description="Half duplex RS-485/RS-422, 2.5 Mbps, ±15kV electro-static discharge (ESD) protection, no slew-rate, no low-power shutdown, with receiver/driver enable, 32 receiver drive kapacitity, DIP-8 and SOIC-8"/>
+      <property name="LCSC" value="C19738"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4ce7dab1-ef5e-4c20-b9a5-f5726fd87fb1</tstamps>
+    </comp>
+    <comp ref="U5">
+      <value>StepperMotorDriverSTSPIN820-board</value>
+      <footprint>MyCustom:StepperMotorDriverSTSPIN820</footprint>
+      <libsource lib="MyCustom" part="StepperMotorDriverSTSPIN820-board" description=""/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="RegulusFocuser-V1.1.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>14351a3c-214b-4fcc-b072-ec51194f158b</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector" part="RJ45">
+      <description>RJ connector, 8P8C (8 positions 8 connected)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>8P8C*</fp>
+        <fp>RJ31*</fp>
+        <fp>RJ32*</fp>
+        <fp>RJ33*</fp>
+        <fp>RJ34*</fp>
+        <fp>RJ35*</fp>
+        <fp>RJ41*</fp>
+        <fp>RJ45*</fp>
+        <fp>RJ49*</fp>
+        <fp>RJ61*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">RJ45</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+        <pin num="3" name="" type="passive"/>
+        <pin num="4" name="" type="passive"/>
+        <pin num="5" name="" type="passive"/>
+        <pin num="6" name="" type="passive"/>
+        <pin num="7" name="" type="passive"/>
+        <pin num="8" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="Screw_Terminal_01x02">
+      <description>Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>TerminalBlock*:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Screw_Terminal_01x02</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector" part="USB_B">
+      <description>USB Type B connector</description>
+      <docs> ~</docs>
+      <footprints>
+        <fp>USB*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">USB_B</field>
+        <field name="Datasheet"> ~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VBUS" type="power_out"/>
+        <pin num="2" name="D-" type="bidirectional"/>
+        <pin num="3" name="D+" type="bidirectional"/>
+        <pin num="4" name="GND" type="power_out"/>
+        <pin num="5" name="Shield" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x02">
+      <description>Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x02</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x03">
+      <description>Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x03</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Connector_Generic" part="Conn_01x04">
+      <description>Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x04</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Buzzer">
+      <description>Buzzer, polarized</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>*Buzzer*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">BZ</field>
+        <field name="Value">Buzzer</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="-" type="passive"/>
+        <pin num="2" name="+" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+        <field name="Datasheet">~</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Interface_UART" part="MAX485E">
+      <description>Half duplex RS-485/RS-422, 2.5 Mbps, ±15kV electro-static discharge (ESD) protection, no slew-rate, no low-power shutdown, with receiver/driver enable, 32 receiver drive kapacitity, DIP-8 and SOIC-8</description>
+      <docs>https://datasheets.maximintegrated.com/en/ds/MAX1487E-MAX491E.pdf</docs>
+      <footprints>
+        <fp>DIP*W7.62mm*</fp>
+        <fp>SOIC*3.9x4.9mm*P1.27mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MAX485E</field>
+        <field name="Datasheet">https://datasheets.maximintegrated.com/en/ds/MAX1487E-MAX491E.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="RO" type="output"/>
+        <pin num="2" name="~{RE}" type="input"/>
+        <pin num="3" name="DE" type="input"/>
+        <pin num="4" name="DI" type="input"/>
+        <pin num="5" name="GND" type="power_in"/>
+        <pin num="6" name="A" type="bidirectional"/>
+        <pin num="7" name="B" type="bidirectional"/>
+        <pin num="8" name="VCC" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Interface_USB" part="FT232RL">
+      <description>USB to Serial Interface, SSOP-28</description>
+      <docs>https://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_FT232R.pdf</docs>
+      <footprints>
+        <fp>SSOP*5.3x10.2mm*P0.65mm*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">FT232RL</field>
+        <field name="Footprint">Package_SO:SSOP-28_5.3x10.2mm_P0.65mm</field>
+        <field name="Datasheet">https://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_FT232R.pdf</field>
+      </fields>
+      <pins>
+        <pin num="1" name="TXD" type="output"/>
+        <pin num="2" name="DTR" type="output"/>
+        <pin num="3" name="RTS" type="output"/>
+        <pin num="4" name="VCCIO" type="power_in"/>
+        <pin num="5" name="RXD" type="input"/>
+        <pin num="6" name="RI" type="input"/>
+        <pin num="7" name="GND" type="power_in"/>
+        <pin num="9" name="DCR" type="input"/>
+        <pin num="10" name="DCD" type="input"/>
+        <pin num="11" name="CTS" type="input"/>
+        <pin num="12" name="CBUS4" type="bidirectional"/>
+        <pin num="13" name="CBUS2" type="bidirectional"/>
+        <pin num="14" name="CBUS3" type="bidirectional"/>
+        <pin num="15" name="USBD+" type="bidirectional"/>
+        <pin num="16" name="USBD-" type="bidirectional"/>
+        <pin num="17" name="3V3OUT" type="power_out"/>
+        <pin num="18" name="GND" type="power_in"/>
+        <pin num="19" name="~{RESET}" type="input"/>
+        <pin num="20" name="VCC" type="power_in"/>
+        <pin num="21" name="GND" type="power_in"/>
+        <pin num="22" name="CBUS1" type="bidirectional"/>
+        <pin num="23" name="CBUS0" type="bidirectional"/>
+        <pin num="25" name="AGND" type="power_in"/>
+        <pin num="26" name="TEST" type="input"/>
+        <pin num="27" name="OSCI" type="input"/>
+        <pin num="28" name="OSCO" type="output"/>
+      </pins>
+    </libpart>
+    <libpart lib="MyCustom" part="LogicLevelShifter-Bidirectional-4Signals-board">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LogicLevelShifter-Bidirectional-4Signals-board</field>
+        <field name="Footprint">MyCustom:LogicLevelShifter_Bidirectional_4Signals-board</field>
+      </fields>
+      <pins>
+        <pin num="1" name="LV1" type="bidirectional"/>
+        <pin num="2" name="LV2" type="bidirectional"/>
+        <pin num="3" name="LV" type="power_in"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="LV3" type="bidirectional"/>
+        <pin num="6" name="LV4" type="bidirectional"/>
+        <pin num="7" name="HV4" type="bidirectional"/>
+        <pin num="8" name="HV3" type="bidirectional"/>
+        <pin num="9" name="GND" type="power_in"/>
+        <pin num="10" name="HV" type="power_in"/>
+        <pin num="11" name="HV2" type="bidirectional"/>
+        <pin num="12" name="HV1" type="bidirectional"/>
+      </pins>
+    </libpart>
+    <libpart lib="MyCustom" part="STM32F103C8T6-board">
+      <fields>
+        <field name="Reference">MC</field>
+        <field name="Value">STM32F103C8T6-board</field>
+        <field name="Footprint">MyCustom:STM32F103C8T6-board</field>
+      </fields>
+      <pins>
+        <pin num="1" name="PB12" type="bidirectional"/>
+        <pin num="2" name="PB13" type="bidirectional"/>
+        <pin num="3" name="PB14" type="bidirectional"/>
+        <pin num="4" name="PB15" type="bidirectional"/>
+        <pin num="5" name="PA8" type="bidirectional"/>
+        <pin num="6" name="PA9" type="bidirectional"/>
+        <pin num="7" name="PA10" type="bidirectional"/>
+        <pin num="8" name="PA11" type="bidirectional"/>
+        <pin num="9" name="PA12" type="bidirectional"/>
+        <pin num="10" name="PA15" type="bidirectional"/>
+        <pin num="11" name="PB3" type="bidirectional"/>
+        <pin num="12" name="PB4" type="bidirectional"/>
+        <pin num="13" name="PB5" type="bidirectional"/>
+        <pin num="14" name="PB6" type="bidirectional"/>
+        <pin num="15" name="PB7" type="bidirectional"/>
+        <pin num="16" name="PB8" type="bidirectional"/>
+        <pin num="17" name="PB9" type="bidirectional"/>
+        <pin num="18" name="5V" type="power_in"/>
+        <pin num="19" name="GND" type="power_in"/>
+        <pin num="20" name="3V3" type="power_out"/>
+        <pin num="21" name="VBAT" type="power_in"/>
+        <pin num="22" name="PC13" type="bidirectional"/>
+        <pin num="23" name="PC14" type="bidirectional"/>
+        <pin num="24" name="PC15" type="bidirectional"/>
+        <pin num="25" name="PA0" type="bidirectional"/>
+        <pin num="26" name="PA1" type="bidirectional"/>
+        <pin num="27" name="PA2" type="bidirectional"/>
+        <pin num="28" name="PA3" type="bidirectional"/>
+        <pin num="29" name="PA4" type="bidirectional"/>
+        <pin num="30" name="PA5" type="bidirectional"/>
+        <pin num="31" name="PA6" type="bidirectional"/>
+        <pin num="32" name="PA7" type="bidirectional"/>
+        <pin num="33" name="PB0" type="bidirectional"/>
+        <pin num="34" name="PB1" type="bidirectional"/>
+        <pin num="35" name="PB10" type="bidirectional"/>
+        <pin num="36" name="PB11" type="bidirectional"/>
+        <pin num="37" name="Reset" type="input"/>
+        <pin num="38" name="3V3" type="passive"/>
+        <pin num="39" name="GND" type="power_in"/>
+        <pin num="40" name="GND" type="power_in"/>
+        <pin num="41" name="3V3" type="power_in"/>
+        <pin num="42" name="SWDIO_PA13" type="bidirectional"/>
+        <pin num="43" name="SWCLK_PA14" type="bidirectional"/>
+        <pin num="44" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="MyCustom" part="StepperMotorDriverSTSPIN820-board">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">StepperMotorDriverSTSPIN820-board</field>
+        <field name="Footprint">MyCustom:StepperMotorDriverSTSPIN820-board</field>
+      </fields>
+      <pins>
+        <pin num="1" name="EN" type="input"/>
+        <pin num="2" name="M1" type="input"/>
+        <pin num="3" name="M2" type="input"/>
+        <pin num="4" name="M3" type="input"/>
+        <pin num="5" name="FLT" type="input"/>
+        <pin num="6" name="STDBY" type="input"/>
+        <pin num="7" name="STEP" type="input"/>
+        <pin num="8" name="DIRECTION" type="input"/>
+        <pin num="9" name="GND" type="power_in"/>
+        <pin num="10" name="VCC" type="power_in"/>
+        <pin num="11" name="A1" type="output"/>
+        <pin num="12" name="A2" type="output"/>
+        <pin num="13" name="B2" type="output"/>
+        <pin num="14" name="B1" type="output"/>
+        <pin num="15" name="GND" type="power_in"/>
+        <pin num="16" name="VMOT" type="power_in"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Connector.kicad_sym</uri>
+    </library>
+    <library logical="Connector_Generic">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Connector_Generic.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Device.kicad_sym</uri>
+    </library>
+    <library logical="Interface_UART">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Interface_UART.kicad_sym</uri>
+    </library>
+    <library logical="Interface_USB">
+      <uri>C:\Program Files\KiCad\6.0\share\kicad\symbols\/Interface_USB.kicad_sym</uri>
+    </library>
+    <library logical="MyCustom">
+      <uri>D:/_Documents-s/Electronics/KiCad/V6/MySymbols&amp;Footprints/MyCustom.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="/3V3">
+      <node ref="J2" pin="3" pintype="passive"/>
+      <node ref="MC1" pin="20" pinfunction="3V3" pintype="power_out"/>
+      <node ref="MC1" pin="21" pinfunction="VBAT" pintype="power_in"/>
+      <node ref="MC1" pin="38" pinfunction="3V3" pintype="passive"/>
+      <node ref="R16" pin="1" pintype="passive"/>
+      <node ref="R17" pin="1" pintype="passive"/>
+      <node ref="R18" pin="1" pintype="passive"/>
+      <node ref="U3" pin="3" pinfunction="LV" pintype="power_in"/>
+      <node ref="U5" pin="10" pinfunction="VCC" pintype="power_in"/>
+    </net>
+    <net code="2" name="/5V">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="C6" pin="1" pintype="passive"/>
+      <node ref="C7" pin="1" pintype="passive"/>
+      <node ref="D1" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="J1" pin="1" pinfunction="VBUS" pintype="power_out"/>
+      <node ref="J7" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="MC1" pin="18" pinfunction="5V" pintype="power_in"/>
+      <node ref="R10" pin="2" pintype="passive"/>
+      <node ref="R11" pin="1" pintype="passive"/>
+      <node ref="R12" pin="2" pintype="passive"/>
+      <node ref="R15" pin="2" pintype="passive"/>
+      <node ref="R6" pin="1" pintype="passive"/>
+      <node ref="R7" pin="1" pintype="passive"/>
+      <node ref="R8" pin="1" pintype="passive"/>
+      <node ref="R9" pin="1" pintype="passive"/>
+      <node ref="U1" pin="19" pinfunction="~{RESET}" pintype="input"/>
+      <node ref="U1" pin="20" pinfunction="VCC" pintype="power_in"/>
+      <node ref="U1" pin="4" pinfunction="VCCIO" pintype="power_in"/>
+      <node ref="U2" pin="8" pinfunction="VCC" pintype="power_in"/>
+      <node ref="U3" pin="10" pinfunction="HV" pintype="power_in"/>
+      <node ref="U4" pin="8" pinfunction="VCC" pintype="power_in"/>
+    </net>
+    <net code="3" name="/485DE">
+      <node ref="R8" pin="2" pintype="passive"/>
+      <node ref="R9" pin="2" pintype="passive"/>
+      <node ref="U2" pin="2" pinfunction="~{RE}" pintype="input"/>
+      <node ref="U2" pin="3" pinfunction="DE" pintype="input"/>
+      <node ref="U3" pin="8" pinfunction="HV3" pintype="bidirectional"/>
+    </net>
+    <net code="4" name="/485DI">
+      <node ref="R11" pin="2" pintype="passive"/>
+      <node ref="U2" pin="4" pinfunction="DI" pintype="input"/>
+      <node ref="U3" pin="11" pinfunction="HV2" pintype="bidirectional"/>
+    </net>
+    <net code="5" name="/485RO">
+      <node ref="R7" pin="2" pintype="passive"/>
+      <node ref="U2" pin="1" pinfunction="RO" pintype="output"/>
+      <node ref="U3" pin="12" pinfunction="HV1" pintype="bidirectional"/>
+    </net>
+    <net code="6" name="/Buzzer">
+      <node ref="BZ1" pin="1" pinfunction="-" pintype="passive"/>
+      <node ref="MC1" pin="25" pinfunction="PA0" pintype="bidirectional"/>
+    </net>
+    <net code="7" name="/Direction">
+      <node ref="MC1" pin="11" pinfunction="PB3" pintype="bidirectional"/>
+      <node ref="U5" pin="8" pinfunction="DIRECTION" pintype="input"/>
+    </net>
+    <net code="8" name="/Enable">
+      <node ref="MC1" pin="12" pinfunction="PB4" pintype="bidirectional"/>
+      <node ref="R16" pin="2" pintype="passive"/>
+      <node ref="U5" pin="1" pinfunction="EN" pintype="input"/>
+    </net>
+    <net code="9" name="/EncClk">
+      <node ref="J2" pin="5" pintype="passive"/>
+      <node ref="MC1" pin="31" pinfunction="PA6" pintype="bidirectional"/>
+    </net>
+    <net code="10" name="/EncDt">
+      <node ref="J2" pin="6" pintype="passive"/>
+      <node ref="MC1" pin="30" pinfunction="PA5" pintype="bidirectional"/>
+    </net>
+    <net code="11" name="/EncSw">
+      <node ref="J2" pin="7" pintype="passive"/>
+      <node ref="MC1" pin="29" pinfunction="PA4" pintype="bidirectional"/>
+    </net>
+    <net code="12" name="/FLT">
+      <node ref="MC1" pin="17" pinfunction="PB9" pintype="bidirectional"/>
+      <node ref="U5" pin="5" pinfunction="FLT" pintype="input"/>
+    </net>
+    <net code="13" name="/L485DE">
+      <node ref="MC1" pin="32" pinfunction="PA7" pintype="bidirectional"/>
+      <node ref="U3" pin="5" pinfunction="LV3" pintype="bidirectional"/>
+    </net>
+    <net code="14" name="/L485DI">
+      <node ref="MC1" pin="6" pinfunction="PA9" pintype="bidirectional"/>
+      <node ref="U3" pin="2" pinfunction="LV2" pintype="bidirectional"/>
+    </net>
+    <net code="15" name="/L485RO">
+      <node ref="MC1" pin="7" pinfunction="PA10" pintype="bidirectional"/>
+      <node ref="U3" pin="1" pinfunction="LV1" pintype="bidirectional"/>
+    </net>
+    <net code="16" name="/LimiterSwitch">
+      <node ref="C8" pin="1" pintype="passive"/>
+      <node ref="J8" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="MC1" pin="1" pinfunction="PB12" pintype="bidirectional"/>
+      <node ref="R17" pin="2" pintype="passive"/>
+    </net>
+    <net code="17" name="/M1">
+      <node ref="MC1" pin="14" pinfunction="PB6" pintype="bidirectional"/>
+      <node ref="U5" pin="2" pinfunction="M1" pintype="input"/>
+    </net>
+    <net code="18" name="/M2">
+      <node ref="MC1" pin="15" pinfunction="PB7" pintype="bidirectional"/>
+      <node ref="U5" pin="3" pinfunction="M2" pintype="input"/>
+    </net>
+    <net code="19" name="/M3">
+      <node ref="MC1" pin="16" pinfunction="PB8" pintype="bidirectional"/>
+      <node ref="U5" pin="4" pinfunction="M3" pintype="input"/>
+    </net>
+    <net code="20" name="/MODBUS+">
+      <node ref="J4" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="R15" pin="1" pintype="passive"/>
+      <node ref="R4" pin="2" pintype="passive"/>
+      <node ref="R6" pin="2" pintype="passive"/>
+      <node ref="U2" pin="6" pinfunction="A" pintype="bidirectional"/>
+      <node ref="U4" pin="6" pinfunction="A" pintype="bidirectional"/>
+    </net>
+    <net code="21" name="/MODBUS-">
+      <node ref="R13" pin="2" pintype="passive"/>
+      <node ref="R14" pin="1" pintype="passive"/>
+      <node ref="R4" pin="1" pintype="passive"/>
+      <node ref="R5" pin="1" pintype="passive"/>
+      <node ref="U2" pin="7" pinfunction="B" pintype="bidirectional"/>
+      <node ref="U4" pin="7" pinfunction="B" pintype="bidirectional"/>
+    </net>
+    <net code="22" name="/RX2">
+      <node ref="J3" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="MC1" pin="28" pinfunction="PA3" pintype="bidirectional"/>
+    </net>
+    <net code="23" name="/Reset">
+      <node ref="J9" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="MC1" pin="37" pinfunction="Reset" pintype="input"/>
+      <node ref="R18" pin="2" pintype="passive"/>
+    </net>
+    <net code="24" name="/SCL-2">
+      <node ref="J2" pin="2" pintype="passive"/>
+      <node ref="MC1" pin="35" pinfunction="PB10" pintype="bidirectional"/>
+      <node ref="R3" pin="1" pintype="passive"/>
+    </net>
+    <net code="25" name="/SDA-2">
+      <node ref="J2" pin="1" pintype="passive"/>
+      <node ref="MC1" pin="36" pinfunction="PB11" pintype="bidirectional"/>
+      <node ref="R2" pin="1" pintype="passive"/>
+    </net>
+    <net code="26" name="/STDBY">
+      <node ref="MC1" pin="13" pinfunction="PB5" pintype="bidirectional"/>
+      <node ref="U5" pin="6" pinfunction="STDBY" pintype="input"/>
+    </net>
+    <net code="27" name="/Step">
+      <node ref="MC1" pin="34" pinfunction="PB1" pintype="bidirectional"/>
+      <node ref="U5" pin="7" pinfunction="STEP" pintype="input"/>
+    </net>
+    <net code="28" name="/TX2">
+      <node ref="J3" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="MC1" pin="27" pinfunction="PA2" pintype="bidirectional"/>
+    </net>
+    <net code="29" name="GND">
+      <node ref="BZ1" pin="2" pinfunction="+" pintype="passive"/>
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="C10" pin="1" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C5" pin="2" pintype="passive"/>
+      <node ref="C6" pin="2" pintype="passive"/>
+      <node ref="C7" pin="2" pintype="passive"/>
+      <node ref="C8" pin="2" pintype="passive"/>
+      <node ref="C9" pin="1" pintype="passive"/>
+      <node ref="J1" pin="4" pinfunction="GND" pintype="power_out"/>
+      <node ref="J1" pin="5" pinfunction="Shield" pintype="passive"/>
+      <node ref="J2" pin="4" pintype="passive"/>
+      <node ref="J2" pin="8" pintype="passive"/>
+      <node ref="J3" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="J5" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J7" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J8" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="J9" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="MC1" pin="19" pinfunction="GND" pintype="power_in"/>
+      <node ref="MC1" pin="39" pinfunction="GND" pintype="power_in"/>
+      <node ref="MC1" pin="40" pinfunction="GND" pintype="power_in"/>
+      <node ref="R1" pin="2" pintype="passive"/>
+      <node ref="R14" pin="2" pintype="passive"/>
+      <node ref="R2" pin="2" pintype="passive"/>
+      <node ref="R3" pin="2" pintype="passive"/>
+      <node ref="R5" pin="2" pintype="passive"/>
+      <node ref="U1" pin="18" pinfunction="GND" pintype="power_in"/>
+      <node ref="U1" pin="21" pinfunction="GND" pintype="power_in"/>
+      <node ref="U1" pin="25" pinfunction="AGND" pintype="power_in"/>
+      <node ref="U1" pin="26" pinfunction="TEST" pintype="input"/>
+      <node ref="U1" pin="7" pinfunction="GND" pintype="power_in"/>
+      <node ref="U2" pin="5" pinfunction="GND" pintype="power_in"/>
+      <node ref="U3" pin="4" pinfunction="GND" pintype="power_in"/>
+      <node ref="U3" pin="9" pinfunction="GND" pintype="power_in"/>
+      <node ref="U4" pin="5" pinfunction="GND" pintype="power_in"/>
+      <node ref="U5" pin="15" pinfunction="GND" pintype="power_in"/>
+      <node ref="U5" pin="9" pinfunction="GND" pintype="power_in"/>
+    </net>
+    <net code="30" name="Net-(C3-Pad1)">
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="J1" pin="3" pinfunction="D+" pintype="bidirectional"/>
+      <node ref="U1" pin="15" pinfunction="USBD+" pintype="bidirectional"/>
+    </net>
+    <net code="31" name="Net-(C4-Pad1)">
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="J1" pin="2" pinfunction="D-" pintype="bidirectional"/>
+      <node ref="U1" pin="16" pinfunction="USBD-" pintype="bidirectional"/>
+    </net>
+    <net code="32" name="Net-(C5-Pad1)">
+      <node ref="C5" pin="1" pintype="passive"/>
+      <node ref="U1" pin="17" pinfunction="3V3OUT" pintype="power_out"/>
+    </net>
+    <net code="33" name="Net-(C10-Pad2)">
+      <node ref="C10" pin="2" pintype="passive"/>
+      <node ref="C9" pin="2" pintype="passive"/>
+      <node ref="J5" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="U5" pin="16" pinfunction="VMOT" pintype="power_in"/>
+    </net>
+    <net code="34" name="Net-(D1-Pad1)">
+      <node ref="D1" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R1" pin="1" pintype="passive"/>
+    </net>
+    <net code="35" name="Net-(D2-Pad1)">
+      <node ref="D2" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="U1" pin="22" pinfunction="CBUS1" pintype="bidirectional"/>
+    </net>
+    <net code="36" name="Net-(D2-Pad2)">
+      <node ref="D2" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R10" pin="1" pintype="passive"/>
+    </net>
+    <net code="37" name="Net-(D3-Pad1)">
+      <node ref="D3" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="U1" pin="23" pinfunction="CBUS0" pintype="bidirectional"/>
+    </net>
+    <net code="38" name="Net-(D3-Pad2)">
+      <node ref="D3" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R12" pin="1" pintype="passive"/>
+    </net>
+    <net code="39" name="Net-(J4-Pad2)">
+      <node ref="J4" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="R13" pin="1" pintype="passive"/>
+    </net>
+    <net code="40" name="Net-(J6-Pad1)">
+      <node ref="J6" pin="1" pinfunction="Pin_1" pintype="passive"/>
+      <node ref="U5" pin="14" pinfunction="B1" pintype="output"/>
+    </net>
+    <net code="41" name="Net-(J6-Pad2)">
+      <node ref="J6" pin="2" pinfunction="Pin_2" pintype="passive"/>
+      <node ref="U5" pin="13" pinfunction="B2" pintype="output"/>
+    </net>
+    <net code="42" name="Net-(J6-Pad3)">
+      <node ref="J6" pin="3" pinfunction="Pin_3" pintype="passive"/>
+      <node ref="U5" pin="12" pinfunction="A2" pintype="output"/>
+    </net>
+    <net code="43" name="Net-(J6-Pad4)">
+      <node ref="J6" pin="4" pinfunction="Pin_4" pintype="passive"/>
+      <node ref="U5" pin="11" pinfunction="A1" pintype="output"/>
+    </net>
+    <net code="44" name="Net-(U1-Pad1)">
+      <node ref="U1" pin="1" pinfunction="TXD" pintype="output"/>
+      <node ref="U4" pin="4" pinfunction="DI" pintype="input"/>
+    </net>
+    <net code="45" name="Net-(U1-Pad5)">
+      <node ref="U1" pin="5" pinfunction="RXD" pintype="input"/>
+      <node ref="U4" pin="1" pinfunction="RO" pintype="output"/>
+    </net>
+    <net code="46" name="Net-(U1-Pad13)">
+      <node ref="U1" pin="13" pinfunction="CBUS2" pintype="bidirectional"/>
+      <node ref="U4" pin="2" pinfunction="~{RE}" pintype="input"/>
+      <node ref="U4" pin="3" pinfunction="DE" pintype="input"/>
+    </net>
+    <net code="47" name="unconnected-(MC1-Pad2)">
+      <node ref="MC1" pin="2" pinfunction="PB13" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="48" name="unconnected-(MC1-Pad3)">
+      <node ref="MC1" pin="3" pinfunction="PB14" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="49" name="unconnected-(MC1-Pad4)">
+      <node ref="MC1" pin="4" pinfunction="PB15" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="50" name="unconnected-(MC1-Pad5)">
+      <node ref="MC1" pin="5" pinfunction="PA8" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="51" name="unconnected-(MC1-Pad8)">
+      <node ref="MC1" pin="8" pinfunction="PA11" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="52" name="unconnected-(MC1-Pad9)">
+      <node ref="MC1" pin="9" pinfunction="PA12" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="53" name="unconnected-(MC1-Pad10)">
+      <node ref="MC1" pin="10" pinfunction="PA15" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="54" name="unconnected-(MC1-Pad22)">
+      <node ref="MC1" pin="22" pinfunction="PC13" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="55" name="unconnected-(MC1-Pad23)">
+      <node ref="MC1" pin="23" pinfunction="PC14" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="56" name="unconnected-(MC1-Pad24)">
+      <node ref="MC1" pin="24" pinfunction="PC15" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="57" name="unconnected-(MC1-Pad26)">
+      <node ref="MC1" pin="26" pinfunction="PA1" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="58" name="unconnected-(MC1-Pad33)">
+      <node ref="MC1" pin="33" pinfunction="PB0" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="59" name="unconnected-(MC1-Pad41)">
+      <node ref="MC1" pin="41" pinfunction="3V3" pintype="power_in+no_connect"/>
+    </net>
+    <net code="60" name="unconnected-(MC1-Pad42)">
+      <node ref="MC1" pin="42" pinfunction="SWDIO_PA13" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="61" name="unconnected-(MC1-Pad43)">
+      <node ref="MC1" pin="43" pinfunction="SWCLK_PA14" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="62" name="unconnected-(MC1-Pad44)">
+      <node ref="MC1" pin="44" pinfunction="GND" pintype="power_in+no_connect"/>
+    </net>
+    <net code="63" name="unconnected-(U1-Pad2)">
+      <node ref="U1" pin="2" pinfunction="DTR" pintype="output+no_connect"/>
+    </net>
+    <net code="64" name="unconnected-(U1-Pad3)">
+      <node ref="U1" pin="3" pinfunction="RTS" pintype="output+no_connect"/>
+    </net>
+    <net code="65" name="unconnected-(U1-Pad6)">
+      <node ref="U1" pin="6" pinfunction="RI" pintype="input+no_connect"/>
+    </net>
+    <net code="66" name="unconnected-(U1-Pad9)">
+      <node ref="U1" pin="9" pinfunction="DCR" pintype="input+no_connect"/>
+    </net>
+    <net code="67" name="unconnected-(U1-Pad10)">
+      <node ref="U1" pin="10" pinfunction="DCD" pintype="input+no_connect"/>
+    </net>
+    <net code="68" name="unconnected-(U1-Pad11)">
+      <node ref="U1" pin="11" pinfunction="CTS" pintype="input+no_connect"/>
+    </net>
+    <net code="69" name="unconnected-(U1-Pad12)">
+      <node ref="U1" pin="12" pinfunction="CBUS4" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="70" name="unconnected-(U1-Pad14)">
+      <node ref="U1" pin="14" pinfunction="CBUS3" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="71" name="unconnected-(U1-Pad27)">
+      <node ref="U1" pin="27" pinfunction="OSCI" pintype="input+no_connect"/>
+    </net>
+    <net code="72" name="unconnected-(U1-Pad28)">
+      <node ref="U1" pin="28" pinfunction="OSCO" pintype="output+no_connect"/>
+    </net>
+    <net code="73" name="unconnected-(U3-Pad6)">
+      <node ref="U3" pin="6" pinfunction="LV4" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="74" name="unconnected-(U3-Pad7)">
+      <node ref="U3" pin="7" pinfunction="HV4" pintype="bidirectional+no_connect"/>
+    </net>
+  </nets>
+</export>

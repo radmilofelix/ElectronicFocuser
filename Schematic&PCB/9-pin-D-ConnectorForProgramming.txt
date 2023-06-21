@@ -1,0 +1,12 @@
+
+
+     Case connector              Programming plug
+1 - 
+2 - Serial Rx (green)       |  Serial Tx (green)
+3 - Serial Tx (orange)      |  Serial Rx (orange)
+4 - 
+5 - GND (black)             |  GND (black)
+6 - 
+7 - ST-Link CLK (yellow)    |  ST-Link CLK (brown)
+8 - ST-Link IO (orange)     |  ST-Link IO (yellow)
+9 - 3.3V (red)              |  3.3V

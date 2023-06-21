@@ -1,0 +1,2 @@
+/usr/bin/indi_regulusfocuser
+/usr/share/indi/indi_regulusfocuser.xml

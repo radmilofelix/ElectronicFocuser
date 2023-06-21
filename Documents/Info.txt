@@ -1,0 +1,8 @@
+Motor: Nema 17 stepper (17HS8401s)
+Driver: DRV8825
+Mot voltage supply: 12V
+Vref=0.6V
+Step mode: 1/32 - 0.002mm/step
+Maximum Position: 8600
+
+
