@@ -609,7 +609,7 @@ else
   DisplayMessageInitStage4();
   Serial2.println("");
   Serial2.println("INIT: 4. Seeking zero position at low speed");
-  fstepper.SetFocuserSpeed(fstepper.optimalSpeed-3);
+  fstepper.SetFocuserSpeed(fstepper.optimalSpeed-1);
   fstepper.stepPosition = fstepper.maxStepsAbsolute/4; // raise position to engage the limit switch when going to zero position
   fstepper.stepTarget = 0;
   fstepper.PulseStepToTarget();
@@ -625,7 +625,12 @@ else
   {
     DisplayMessageInitErrorSlipping();
     remoteControlEnabled = false;
-
+    SignalBeeps(5,1500);
+    delay(1000);
+    SignalBeeps(5,1500);
+    delay(1000);
+    SignalBeeps(5,1500);
+    delay(1000);
   }
   else
   {
