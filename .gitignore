@@ -1,4 +1,10 @@
+*.o
+*.exe
+*.gcode
+*.FCStd1
+
 Images/
 ElectronicFocuser-Test-Pi/
 Misc/
+**/*backups/
 
