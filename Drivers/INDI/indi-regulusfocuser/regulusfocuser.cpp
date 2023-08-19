@@ -81,11 +81,6 @@ void RegulusFocuser::ISGetProperties(const char *dev)
         return;
 
     INDI::Focuser::ISGetProperties(dev);
-
-    /*
-        defineProperty(&ModeSP);
-        loadConfig(true, "Mode");
-    */
 }
 
 /************************************************************************************
@@ -122,15 +117,6 @@ bool RegulusFocuser::initProperties()
     IUFillNumber(&FocusMaxPosN[0], "FOCUS_MAX_VALUE", "Steps", "%.f", 1, 150000, 1, 50000);
     IUFillNumberVector(&FocusMaxPosNP, FocusMaxPosN, 1, getDeviceName(), "FOCUS_MAX", "Max. Position",
                        MAIN_CONTROL_TAB, IP_RO, 60, IPS_OK);
-
-    /*
-        IUFillSwitch(&ModeS[MODE_ALL], "All", "All", ISS_ON);
-        IUFillSwitch(&ModeS[MODE_ABSOLUTE], "Absolute", "Absolute", ISS_OFF);
-        IUFillSwitch(&ModeS[MODE_RELATIVE], "Relative", "Relative", ISS_OFF);
-        IUFillSwitch(&ModeS[MODE_TIMER], "Timer", "Timer", ISS_OFF);
-        IUFillSwitchVector(&ModeSP, ModeS, MODE_COUNT, getDeviceName(), "Mode", "Mode", MAIN_CONTROL_TAB, IP_RW,
-                           ISR_1OFMANY, 60, IPS_IDLE);
-    //*/
 
     initTicks = sqrt(FWHMN[0].value - SeeingN[0].value) / 0.75;
 
@@ -184,46 +170,6 @@ bool RegulusFocuser::ISNewSwitch(const char *dev, const char *name, ISState *sta
 {
     if (dev != nullptr && strcmp(dev, getDeviceName()) == 0)
     {
-
-        /*
-                // Modes
-                if (strcmp(ModeSP.name, name) == 0)
-                {
-                    IUUpdateSwitch(&ModeSP, states, names, n);
-                    uint32_t cap = 0;
-                    int index    = IUFindOnSwitchIndex(&ModeSP);
-
-                    switch (index)
-                    {
-                        case MODE_ALL:
-                            cap = FOCUSER_CAN_ABS_MOVE | FOCUSER_CAN_REL_MOVE | FOCUSER_HAS_VARIABLE_SPEED;
-                            break;
-
-                        case MODE_ABSOLUTE:
-                            cap = FOCUSER_CAN_ABS_MOVE;
-                            break;
-
-                        case MODE_RELATIVE:
-                            cap = FOCUSER_CAN_REL_MOVE;
-                            break;
-
-                        case MODE_TIMER:
-                            cap = FOCUSER_HAS_VARIABLE_SPEED;
-                            break;
-
-                        default:
-                            ModeSP.s = IPS_ALERT;
-                            IDSetSwitch(&ModeSP, "Unknown mode index %d", index);
-                            return true;
-                    }
-
-                    FI::SetCapability(cap);
-                    ModeSP.s = IPS_OK;
-                    IDSetSwitch(&ModeSP, nullptr);
-                    return true;
-                }
-        //*/
-
         if ( (strcmp(FocusMotionSP.name, name) == 0) && (modbus_f.registry_buffer[REGFAULT] == 0) )
         {
             IUUpdateSwitch(&FocusMotionSP, states, names, n);
@@ -312,9 +258,6 @@ bool RegulusFocuser::ISNewSwitch(const char *dev, const char *name, ISState *sta
             IDSetSwitch(&ResetSP, nullptr);
             return true;
         }
-
-
-
     }
 
     return INDI::Focuser::ISNewSwitch(dev, name, states, names, n);
@@ -345,59 +288,9 @@ bool RegulusFocuser::ISNewNumber(const char *dev, const char *name, double value
             return true;
         }
     }
-
     // Let INDI::Focuser handle any other number properties
     return INDI::Focuser::ISNewNumber(dev, name, values, names, n);
 }
-
-/************************************************************************************
- *
-************************************************************************************/
-
-
-/*
-IPState RegulusFocuser::MoveFocuser(FocusDirection dir, int speed, uint16_t duration)
-{
-    double mid         = (FocusAbsPosN[0].max - FocusAbsPosN[0].min) / 2;
-    int mode           = IUFindOnSwitchIndex(&ModeSP);
-    double targetTicks = ((dir == FOCUS_INWARD) ? -1 : 1) * (speed * duration);
-
-    internalTicks += targetTicks;
-
-    if (mode == MODE_ALL)
-    {
-        if (internalTicks < FocusAbsPosN[0].min || internalTicks > FocusAbsPosN[0].max)
-        {
-            internalTicks -= targetTicks;
-            LOG_ERROR("Cannot move focuser in this direction any further.");
-            return IPS_ALERT;
-        }
-    }
-
-    // simulate delay in motion as the focuser moves to the new position
-    usleep(duration * 1000);
-
-    double ticks = initTicks + (internalTicks - mid) / 5000.0;
-
-    FWHMN[0].value = 0.5625 * ticks * ticks + SeeingN[0].value;
-
-    LOGF_DEBUG("TIMER Current internal ticks: %g FWHM ticks: %g FWHM: %g", internalTicks, ticks,
-               FWHMN[0].value);
-
-    if (mode == MODE_ALL)
-    {
-        FocusAbsPosN[0].value = internalTicks;
-        IDSetNumber(&FocusAbsPosNP, nullptr);
-    }
-
-    if (FWHMN[0].value < SeeingN[0].value)
-        FWHMN[0].value = SeeingN[0].value;
-
-    IDSetNumber(&FWHMNP, nullptr);
-
-    return IPS_OK;
-}
-//*/
 
 
 /************************************************************************************
@@ -407,33 +300,11 @@ IPState RegulusFocuser::MoveAbsFocuser(uint32_t targetTicks)
 {
     if( (modbus_f.registry_buffer[REGFAULT] == 1) )
         return IPS_ALERT;
-    /*
-        double mid = (FocusAbsPosN[0].max - FocusAbsPosN[0].min) / 2;
-
-        internalTicks = targetTicks;
-
-        // Limit to +/- 10 from initTicks
-        double ticks = initTicks + (targetTicks - mid) / 5000.0;
-
-        // simulate delay in motion as the focuser moves to the new position
-        usleep(std::abs((int)(targetTicks - FocusAbsPosN[0].value) * FOCUS_MOTION_DELAY));
-    */
     FocusAbsPosN[0].value = targetTicks;
 
     modbus_f.registry_buffer[REGREQUESTEDPOSITIONLO]=targetTicks&65535;
     modbus_f.registry_buffer[REGREQUESTEDPOSITIONHI]=targetTicks>>16;
     SendCommand(CMDGOTOPOSITION);
-
-    /*
-        FWHMN[0].value = 0.5625 * ticks * ticks + SeeingN[0].value;
-        LOGF_DEBUG("ABS Current internal ticks: %g FWHM ticks: %g FWHM: %g", internalTicks, ticks,
-                   FWHMN[0].value);
-
-        if (FWHMN[0].value < SeeingN[0].value)
-            FWHMN[0].value = SeeingN[0].value;
-
-        IDSetNumber(&FWHMNP, nullptr);
-    */
     return IPS_OK;
 }
 
@@ -444,13 +315,6 @@ IPState RegulusFocuser::MoveRelFocuser(FocusDirection dir, uint32_t ticks)
 {
     if( (modbus_f.registry_buffer[REGFAULT] == 1) )
         return IPS_ALERT;
-
-    /*
-        uint32_t targetTicks = FocusAbsPosN[0].value + (ticks * (dir == FOCUS_INWARD ? -1 : 1));
-        FocusAbsPosNP.s = IPS_BUSY;
-        IDSetNumber(&FocusAbsPosNP, nullptr);
-        return MoveAbsFocuser(targetTicks);
-    //*/
     modbus_f.registry_buffer[REGREQUESTEDPOSITIONLO]=ticks&65535;
     modbus_f.registry_buffer[REGREQUESTEDPOSITIONHI]=ticks>>16;
     SendCommand(CMDGOTORELATIVE);
@@ -492,30 +356,11 @@ bool RegulusFocuser::SetFocuserBacklashEnabled(bool enabled)
 void RegulusFocuser::TimerHit()
 {
     UpdateValues();
-    /*
-        if(!TestConnection())
-    		CloseConnection();
-        if (!isConnected())
-            return; //  No need to reset timer if we are not connected anymore
-        GetRoofPosition();
-        SendMountStatus();
-        if(roofMoving !=0)
-        {
-    	if(roofMovementCycles)
-    	    roofMovementCycles--;
-    	else
-    	    roofMoving=0;
-        }
-    //*/
     SetTimer(TIMERHIT_VALUE);
 }
 
 void RegulusFocuser::UpdateValues()
 {
-//  int errors=0;
-//  int changes=0;
-//  {
-
     usleep(MODBUSDELAY);
     modbus_f.ReadRegisters(0,NUMBEROFREGISTERS,0);
 
@@ -559,7 +404,6 @@ void RegulusFocuser::UpdateValues()
     }
 
     if( (modbus_f.registry_buffer[REGFAULT] == 1) && (FocuserFaultL[0].s != IPS_ALERT) )
-//    if( (modbus_f.registry_buffer[REGFAULT] == 1) )
     {
         FocuserFaultLP.s  = IPS_ALERT;
         FocuserFaultL[0].s  = IPS_ALERT;
@@ -580,7 +424,6 @@ void RegulusFocuser::UpdateValues()
         IDSetSwitch(&FocusMotionSP, nullptr);
     }
     if( (modbus_f.registry_buffer[REGFAULT] == 0) && (FocuserFaultL[0].s == IPS_ALERT) )
-//    else
     {
         FocuserFaultLP.s  = IPS_OK;
         FocuserFaultL[0].s  = IPS_OK;

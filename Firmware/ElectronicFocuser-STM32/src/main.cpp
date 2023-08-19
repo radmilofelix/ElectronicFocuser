@@ -2,35 +2,6 @@
 #include "ElectronicFocuser.h"
 
 
-void LimitSwitchInterrupt()
-{
-  if(fstepper.stepPosition==0)
-    return;
-#ifdef LIMITSWITCHNORMALLYCLOSED
-  if(digitalRead(LIMITSWITCHPIN))
-#else
-  if(!digitalRead(LIMITSWITCHPIN))
-#endif
-  {
-    if( (millis() - previousPress) > contactDebounce )
-    {
-      lostSteps = fstepper.stepPosition;
-#ifdef DEBUG
-      Serial2.print("zerolimitPosition: "); Serial2.println(lostSteps);
-#endif
-      fstepper.stepPosition = 0;
-      previousPress = millis();
-      interruptTriggered = true;
-#ifdef DEBUG
-      Serial2.println("Limit Switch!!!");
-#endif
-    }
-  }
-#ifdef DEBUG
-  Serial2.println("Limit Switch Debounced!!!");
-#endif
-}
-
 void setup()
 {
   // pin definitions
@@ -91,6 +62,38 @@ void setup()
   lostSteps = 0;
 } // Setup()
 
+
+void LimitSwitchInterrupt()
+{
+  if(fstepper.stepPosition==0)
+    return;
+#ifdef LIMITSWITCHNORMALLYCLOSED
+  if(digitalRead(LIMITSWITCHPIN))
+#else
+  if(!digitalRead(LIMITSWITCHPIN))
+#endif
+  {
+    if( (millis() - previousPress) > contactDebounce )
+    {
+      lostSteps = fstepper.stepPosition;
+#ifdef DEBUG
+      Serial2.print("zerolimitPosition: "); Serial2.println(lostSteps);
+#endif
+      fstepper.stepPosition = 0;
+      previousPress = millis();
+      interruptTriggered = true;
+#ifdef DEBUG
+      Serial2.println("Limit Switch!!!");
+#endif
+    }
+  }
+#ifdef DEBUG
+  Serial2.println("Limit Switch Debounced!!!");
+#endif
+}
+
+
+#ifdef DEBUG
 void DisplayMenu()
 {
  // Serial monitor menu
@@ -119,6 +122,7 @@ void DisplayMenu()
   Serial2.println();
   //
 }
+
 
 void DisplayFocuserData()
 {
@@ -152,31 +156,32 @@ void DisplayFocuserData()
   Serial2.println();
 }
 
-  unsigned long ReadNumber()
+unsigned long ReadNumber()
+{
+  unsigned long charsread = 0;
+  unsigned long tempMillis = millis();
+  byte chars = 0;
+  do
   {
-    unsigned long charsread = 0;
-    unsigned long tempMillis = millis();
-    byte chars = 0;
-    do
+    if (Serial2.available())
     {
-      if (Serial2.available())
+      byte tempChar = Serial2.read();
+      chars++;
+      if ((tempChar >= 48) && (tempChar <= 57))//is it a number?
       {
-        byte tempChar = Serial2.read();
-        chars++;
-        if ((tempChar >= 48) && (tempChar <= 57))//is it a number?
-        {
-          charsread = (charsread * 10) + (tempChar - 48);
-        }
-        else if ((tempChar == 10) || (tempChar == 13))
-        {
-          //exit at CR/LF
-          break;
-        }
-       }
-    }
+        charsread = (charsread * 10) + (tempChar - 48);
+      }
+      else if ((tempChar == 10) || (tempChar == 13))
+      {
+        //exit at CR/LF
+        break;
+      }
+      }
+  }
   while ((millis() - tempMillis < 2000) && (charsread <= 100000) && (chars < 10));
   return (charsread);
 }
+
 
 void DisplayValues()
 {
@@ -316,91 +321,12 @@ void KeyboardOperationSelect()
     }
   }
 }
+#endif
 
 void MotorInit()
 {
     fstepper.EnableMotor(true);
 }
-
-void loop()
-{
-  if(notInit)
-    FocuserInit();
-
-  ModbusPoll();
-  CommandProcessor();
-  KeyboardOperationSelect();
-
-if(remoteControlEnabled)
-  {
-    if(fstepper.stepPosition != fstepper.stepTarget)
-    {
-      bool endBeeps = false;
-      if(abs(fstepper.stepPosition - fstepper.stepTarget) > 10000)
-        endBeeps = true;
-      MotorInit();
-      DisplayRefresh();
-      fstepper.PulseStepToTarget();
-      if(endBeeps)
-      {
-        Signal2Beep2();
-      }
-      DisplayRefresh();
-    }
-    if( (fstepper.stepPosition == 0) & interruptTriggered)
-    {
-      SignalBeeps(2,2000);
-      DisplayRefresh();
-      interruptTriggered = false;
-    }
-    encoder->tick(); // just call tick() to check the state.
-    int newPos = encoder->getPosition();
-    if (pos != newPos)
-    {
-      if(newPos >= 0)
-        pos = newPos;
-      else
-      {
-        newPos = 0;
-        encoder->setPosition(0);
-      }
-      int maxPos = fstepper.maxSteps/fstepper.stepRate + 1;
-      if(newPos <= maxPos)
-        pos = newPos;
-      else
-        encoder->setPosition(maxPos);
-  #ifdef DEBUG
-      Serial2.print("newPos: ");
-      Serial2.print(newPos);
-      Serial2.print("; pos:");
-      Serial2.print(pos);
-      Serial2.print("; dir:");
-      Serial2.print((int)(encoder->getDirection()));
-      Serial2.print("; maxPos: "); Serial2.println(maxPos);
-  #endif 
-      fstepper.stepTarget = pos*fstepper.stepRate;
-      if(fstepper.stepTarget > fstepper.maxSteps)
-        fstepper.stepTarget = fstepper.maxSteps;
-      if(fstepper.stepTarget < 0)
-        fstepper.stepTarget = 0;
-    } // if  (pos != newPos)
-
-    // keep watching the push button, even when no interrupt happens:
-    button.tick();
-    if( (millis() - cycleTime > longClickCycleTime) && longPress)
-    {
-        if(fstepper.speedIndex < 15)
-        fstepper.speedIndex++;
-        fstepper.SetFocuserSpeed(fstepper.speedIndex);
-        encoder->setPosition(fstepper.stepPosition/fstepper.stepRate); // recompute encoder position
-        DisplayRefresh();
-        longClickCycles++;
-        Serial2.print("LongPressCycles: "); Serial2.println(longClickCycles);
-        cycleTime = millis();
-        SignalBeep2();
-    }
-  } // if(remoteControlEnabled)
-} // loop
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -640,7 +566,9 @@ else
     encoder->setPosition(fstepper.maxSteps/2/fstepper.stepRate);
     Serial2.println("Focuser to middle");
     DisplayRefresh();
+#ifdef DEBUG
     DisplayMenu();
+#endif
   }
 } // FocuserInit()
 
@@ -849,7 +777,6 @@ void DisplayMessageZeroSync()
   display.println("Finding zero...");
   display.display();  
 }
-
 
 
 void SignalBeeps( int nbeeps, int beepFreq)
@@ -1211,3 +1138,77 @@ void CommandProcessor()
   modbus_f.dataBuffer[REGRESPONSETOPI] = modbus_f.dataBuffer[REGCOMMANDFROMPI];
   modbus_f.dataBuffer[REGCOMMANDFROMPI]=0;
 } // CommandProcessor()
+
+
+void loop()
+{
+  if(notInit)
+  {
+    FocuserInit();
+  }
+  ModbusPoll();
+  CommandProcessor();
+#ifdef DEBUG
+  KeyboardOperationSelect();
+#endif
+if(remoteControlEnabled)
+  {
+    if(fstepper.stepPosition != fstepper.stepTarget)
+    {
+      bool endBeeps = false;
+      if(abs(fstepper.stepPosition - fstepper.stepTarget) > 10000)
+        endBeeps = true;
+      MotorInit();
+      DisplayRefresh();
+      fstepper.PulseStepToTarget();
+      if(endBeeps)
+      {
+        Signal2Beep2();
+      }
+      DisplayRefresh();
+    }
+    if( (fstepper.stepPosition == 0) & interruptTriggered)
+    {
+      SignalBeeps(2,2000);
+      DisplayRefresh();
+      interruptTriggered = false;
+    }
+    encoder->tick(); // just call tick() to check the state.
+    int newPos = encoder->getPosition();
+    if (pos != newPos)
+    {
+      if(newPos >= 0)
+        pos = newPos;
+      else
+      {
+        newPos = 0;
+        encoder->setPosition(0);
+      }
+      int maxPos = fstepper.maxSteps/fstepper.stepRate + 1;
+      if(newPos <= maxPos)
+        pos = newPos;
+      else
+        encoder->setPosition(maxPos);
+      fstepper.stepTarget = pos*fstepper.stepRate;
+      if(fstepper.stepTarget > fstepper.maxSteps)
+        fstepper.stepTarget = fstepper.maxSteps;
+      if(fstepper.stepTarget < 0)
+        fstepper.stepTarget = 0;
+    } // if  (pos != newPos)
+
+    // keep watching the push button, even when no interrupt happens:
+    button.tick();
+    if( (millis() - cycleTime > longClickCycleTime) && longPress)
+    {
+        if(fstepper.speedIndex < 15)
+        fstepper.speedIndex++;
+        fstepper.SetFocuserSpeed(fstepper.speedIndex);
+        encoder->setPosition(fstepper.stepPosition/fstepper.stepRate); // recompute encoder position
+        DisplayRefresh();
+        longClickCycles++;
+        Serial2.print("LongPressCycles: "); Serial2.println(longClickCycles);
+        cycleTime = millis();
+        SignalBeep2();
+    }
+  } // if(remoteControlEnabled)
+} // loop

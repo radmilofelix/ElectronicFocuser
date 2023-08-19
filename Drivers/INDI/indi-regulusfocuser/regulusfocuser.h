@@ -60,7 +60,6 @@ class RegulusFocuser : public INDI::Focuser
         bool Disconnect() override;
         void TimerHit() override;
         void UpdateValues();
-//        virtual IPState MoveFocuser(FocusDirection dir, int speed, uint16_t duration) override;
         virtual IPState MoveAbsFocuser(uint32_t targetTicks) override;
         virtual IPState MoveRelFocuser(FocusDirection dir, uint32_t ticks) override;
         virtual bool SetFocuserSpeed(int speed) override;
@@ -82,21 +81,6 @@ class RegulusFocuser : public INDI::Focuser
         // Temperature in celcius degrees
         INumberVectorProperty TemperatureNP;
         INumber TemperatureN[1];
-
-
-/*
-        // Current mode of Focus simulator for testing purposes
-        enum
-        {
-            MODE_ALL,
-            MODE_ABSOLUTE,
-            MODE_RELATIVE,
-            MODE_TIMER,
-            MODE_COUNT
-        };
-        ISwitchVectorProperty ModeSP;
-        ISwitch ModeS[MODE_COUNT];
-//*/
 
 	enum
 	{

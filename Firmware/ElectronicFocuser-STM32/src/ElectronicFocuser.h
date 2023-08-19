@@ -23,14 +23,19 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire1, -1);
 HardwareSerial Serial2(USART2);   // PA3  (RX)  PA2  (TX)
 
 void setup();
-void FocuserInit();
 void loop();
+void LimitSwitchInterrupt();
+void MotorInit();
+void FocuserInit();
+void SyncToZero();
+
+#ifdef DEBUG
 void DisplayMenu();
+void DisplayFocuserData();
 unsigned long ReadNumber();
 void DisplayValues();
 void KeyboardOperationSelect();
-void MotorInit();
-void SyncToZero();
+#endif
 
 void SignalBeeps( int nbeeps, int beepFreq);
 void Signal2Beep1();
@@ -50,9 +55,20 @@ void DisplayMessageInitStage4();
 void DisplayMessageInitErrorSlipping();
 void DisplayMessageZeroSync();
 void DisplayFocuserData();
+void DisplayRefresh();
 
 void ModbusPoll();
 void CommandProcessor();
+
+///////////////////////////////////////////////// Encoder callbacks ////////////////////////////////////////////////////////////////////////////////
+void CheckTicks();
+void SingleClick();
+void DoubleClick();
+void MultiClick();
+void PressStart();
+void PressStop();
+static int pos = 0;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool notInit = true;
 bool interruptTriggered = false;
@@ -68,19 +84,8 @@ unsigned int previousPress = 0;
 int contactDebounce = 400;
 int variableTextSize = 2;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CheckTicks();
-void SingleClick();
-void DoubleClick();
-void MultiClick();
-void PressStart();
-void PressStop();
-static int pos = 0;
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-void DisplayRefresh();
-
 RotaryEncoder *encoder = nullptr;
 OneButton button(ENCODER_SW, true);
 ModbusSlave modbus_f(1,Serial1,PA7);
 FocuserStepper fstepper;
+

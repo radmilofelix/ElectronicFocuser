@@ -1,7 +1,0 @@
-/home/pi/indi-regulusfocuser/build/CMakeFiles/install/strip.dir
-/home/pi/indi-regulusfocuser/build/CMakeFiles/install/local.dir
-/home/pi/indi-regulusfocuser/build/CMakeFiles/edit_cache.dir
-/home/pi/indi-regulusfocuser/build/CMakeFiles/install.dir
-/home/pi/indi-regulusfocuser/build/CMakeFiles/list_install_components.dir
-/home/pi/indi-regulusfocuser/build/CMakeFiles/rebuild_cache.dir
-/home/pi/indi-regulusfocuser/build/CMakeFiles/indi_regulusfocuser.dir
