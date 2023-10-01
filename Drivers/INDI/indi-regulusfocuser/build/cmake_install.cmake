@@ -1,4 +1,4 @@
-# Install script for directory: /home/pi/indi-regulusfocuser
+# Install script for directory: /home/radmilo/Data/Data-L/Projects/indi-drivers/indi-regulusfocuser
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -49,7 +49,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/indi_regulusfocuser"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/pi/indi-regulusfocuser/build/indi_regulusfocuser")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/radmilo/Data/Data-L/Projects/indi-drivers/indi-regulusfocuser/build/indi_regulusfocuser")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/indi_regulusfocuser" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/indi_regulusfocuser")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -67,7 +67,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/usr/share/indi" TYPE FILE FILES "/home/pi/indi-regulusfocuser/build/indi_regulusfocuser.xml")
+  file(INSTALL DESTINATION "/usr/share/indi" TYPE FILE FILES "/home/radmilo/Data/Data-L/Projects/indi-drivers/indi-regulusfocuser/build/indi_regulusfocuser.xml")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -78,5 +78,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/pi/indi-regulusfocuser/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/radmilo/Data/Data-L/Projects/indi-drivers/indi-regulusfocuser/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

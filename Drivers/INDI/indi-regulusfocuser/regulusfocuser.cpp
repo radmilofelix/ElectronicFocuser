@@ -1,22 +1,19 @@
 /*******************************************************************************
-    Regulus Focuser
-    Copyright (C) 2022 Radmilo Felix
+  Copyright(c) 2012 Jasem Mutlaq. All rights reserved.
 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
-   USA
-
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Library General Public
+ License version 2 as published by the Free Software Foundation.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Library General Public License for more details.
+ .
+ You should have received a copy of the GNU Library General Public License
+ along with this library; see the file COPYING.LIB.  If not, write to
+ the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ Boston, MA 02110-1301, USA.
 *******************************************************************************/
 
 #include "regulusfocuser.h"
@@ -37,7 +34,7 @@ static std::unique_ptr<RegulusFocuser> regulusFocuser(new RegulusFocuser());
 ************************************************************************************/
 RegulusFocuser::RegulusFocuser() : modbus_f("/dev/ttyUSB0", 19200, 'N', 8, 1)
 {
-    FI::SetCapability(FOCUSER_CAN_ABS_MOVE | FOCUSER_CAN_REL_MOVE | FOCUSER_HAS_VARIABLE_SPEED | FOCUSER_HAS_BACKLASH);
+    FI::SetCapability(FOCUSER_CAN_ABS_MOVE | FOCUSER_CAN_REL_MOVE | FOCUSER_HAS_VARIABLE_SPEED);
 }
 
 /************************************************************************************
@@ -94,15 +91,16 @@ bool RegulusFocuser::initProperties()
     IUFillSwitch(&RemoteControlS[REMOTECONTROL_ENABLE], "Enabled", "Enabled", ISS_ON);
     IUFillSwitch(&RemoteControlS[REMOTECONTROL_DISABLE], "Disabled", "Disabled", ISS_OFF);
     IUFillSwitchVector(&RemoteControlSP, RemoteControlS, REMOTECONTROL_COUNT, getDeviceName(),
-                       "RemoteCtrl", "RemoteCtrl", MAIN_CONTROL_TAB, IP_RW, ISR_1OFMANY, 60, IPS_IDLE);
+                    "RemoteCtrl", "RemoteCtrl", MAIN_CONTROL_TAB, IP_RW, ISR_1OFMANY, 60, IPS_IDLE);
 
     IUFillSwitch(&ResetS[0], "Reset", "Reset", ISS_OFF);
     IUFillSwitchVector(&ResetSP, ResetS, 1, getDeviceName(),
-                       "Reset", "Reset", MAIN_CONTROL_TAB, IP_RW, ISR_1OFMANY, 60, IPS_IDLE);
+                    "Reset", "Reset", MAIN_CONTROL_TAB, IP_RW, ISR_1OFMANY, 60, IPS_IDLE);
 
     IUFillLight(&FocuserFaultL[0], "FocuserFault", "", IPS_IDLE);
     IUFillLightVector(&FocuserFaultLP, FocuserFaultL, 1, getDeviceName(), "FocuserFault", "", MAIN_CONTROL_TAB, IPS_IDLE);
 
+/*
     IUFillNumber(&SeeingN[0], "SIM_SEEING", "arcseconds", "%4.2f", 0, 60, 0, 3.5);
     IUFillNumberVector(&SeeingNP, SeeingN, 1, getDeviceName(), "SEEING_SETTINGS", "Seeing", MAIN_CONTROL_TAB, IP_RW, 60,
                        IPS_IDLE);
@@ -113,12 +111,13 @@ bool RegulusFocuser::initProperties()
     IUFillNumber(&TemperatureN[0], "TEMPERATURE", "Celsius", "%6.2f", -50., 70., 0., 0.);
     IUFillNumberVector(&TemperatureNP, TemperatureN, 1, getDeviceName(), "FOCUS_TEMPERATURE", "Temperature",
                        MAIN_CONTROL_TAB, IP_RW, 0, IPS_IDLE);
+//*/
 
     IUFillNumber(&FocusMaxPosN[0], "FOCUS_MAX_VALUE", "Steps", "%.f", 1, 150000, 1, 50000);
     IUFillNumberVector(&FocusMaxPosNP, FocusMaxPosN, 1, getDeviceName(), "FOCUS_MAX", "Max. Position",
                        MAIN_CONTROL_TAB, IP_RO, 60, IPS_OK);
 
-    initTicks = sqrt(FWHMN[0].value - SeeingN[0].value) / 0.75;
+//    initTicks = sqrt(FWHMN[0].value - SeeingN[0].value) / 0.75;
 
     FocusSpeedN[0].min   = 1;
     FocusSpeedN[0].max   = 15;
@@ -146,18 +145,22 @@ bool RegulusFocuser::updateProperties()
         defineProperty(&RemoteControlSP);
         defineProperty(&ResetSP);
         defineProperty(&FocuserFaultLP);
+/*        
         defineProperty(&SeeingNP);
         defineProperty(&FWHMNP);
         defineProperty(&TemperatureNP);
+//*/
     }
     else
     {
         deleteProperty(RemoteControlSP.name);
         deleteProperty(ResetSP.name);
         deleteProperty(FocuserFaultLP.name);
+/*
         deleteProperty(SeeingNP.name);
         deleteProperty(FWHMNP.name);
         deleteProperty(TemperatureNP.name);
+//*/
     }
 
     return true;
@@ -170,24 +173,26 @@ bool RegulusFocuser::ISNewSwitch(const char *dev, const char *name, ISState *sta
 {
     if (dev != nullptr && strcmp(dev, getDeviceName()) == 0)
     {
+
+
         if ( (strcmp(FocusMotionSP.name, name) == 0) && (modbus_f.registry_buffer[REGFAULT] == 0) )
         {
             IUUpdateSwitch(&FocusMotionSP, states, names, n);
             int motionIndex = IUFindOnSwitchIndex(&FocusMotionSP);
             switch(motionIndex)
             {
-            case FOCUS_INWARD:
-                SendCommand(CMDRETRACT);
+                case FOCUS_INWARD:
+                    SendCommand(CMDRETRACT);
 //                    LOG_WARN("FOCUS inward.");
-                break;
-            case FOCUS_OUTWARD:
-                SendCommand(CMDEXTEND);
+                    break;
+                case FOCUS_OUTWARD:
+                    SendCommand(CMDEXTEND);
 //                    LOG_ERROR("FOCUS outward.");
-                break;
-            default:
-                LOG_ERROR("FOCUS default.");
-                FocusMotionSP.s = IPS_ALERT;
-                IDSetSwitch(&FocusMotionSP, "Unknown motion direction %d", motionIndex);
+                    break;
+                default:
+                    LOG_ERROR("FOCUS default.");
+                    FocusMotionSP.s = IPS_ALERT;
+                    IDSetSwitch(&FocusMotionSP, "Unknown motion direction %d", motionIndex);
             }
             FocusMotionSP.s = IPS_OK;
             IDSetSwitch(&FocusMotionSP, nullptr);
@@ -201,18 +206,18 @@ bool RegulusFocuser::ISNewSwitch(const char *dev, const char *name, ISState *sta
 
             switch(remoteControlIndex)
             {
-            case REMOTECONTROL_ENABLE:
-                SendCommand(CMDREMOTEENABLE);
-//                    LOG_WARN("Remote ON.");
-                break;
-            case REMOTECONTROL_DISABLE:
-                SendCommand(CMDREMOTEDISABLE);
-//                    LOG_ERROR("Remote OFF.");
-                break;
-            default:
-                LOG_ERROR("RemoteControl default.");
-                FocusMotionSP.s = IPS_ALERT;
-                IDSetSwitch(&FocusMotionSP, "Unknown value for remote control %d", remoteControlIndex);
+                case REMOTECONTROL_ENABLE:
+                    SendCommand(CMDREMOTEENABLE);
+                    LOG_WARN("Remote ON.");
+                    break;
+                case REMOTECONTROL_DISABLE:
+                    SendCommand(CMDREMOTEDISABLE);
+                    LOG_WARN("Remote OFF.");
+                    break;
+                default:
+                    LOG_WARN("RemoteControl default.");
+                    FocusMotionSP.s = IPS_ALERT;
+                    IDSetSwitch(&FocusMotionSP, "Unknown value for remote control %d", remoteControlIndex);
             }
 
             RemoteControlSP.s = IPS_OK;
@@ -227,31 +232,31 @@ bool RegulusFocuser::ISNewSwitch(const char *dev, const char *name, ISState *sta
 
             switch(resetIndex)
             {
-            case 0:
-                FocuserFaultLP.s  = IPS_ALERT;
-                FocuserFaultL[0].s  = IPS_ALERT;
-                FocusAbsPosNP.s = IPS_ALERT;
-                RemoteControlSP.s = IPS_ALERT;
-                ResetSP.s = IPS_ALERT;
-                FocusMaxPosNP.s = IPS_ALERT;
-                FocusSpeedNP.s = IPS_ALERT;
-                FocusRelPosNP.s = IPS_ALERT;
-                FocusMotionSP.s = IPS_ALERT;
-                IDSetLight(&FocuserFaultLP, nullptr);
-                IDSetNumber(&FocusSpeedNP, nullptr);
-                IDSetNumber(&FocusAbsPosNP, nullptr);
-                IDSetNumber(&FocusMaxPosNP, nullptr);
-                IDSetNumber(&FocusRelPosNP, nullptr);
-                IDSetSwitch(&FocusMotionSP, nullptr);
-                IDSetSwitch(&RemoteControlSP, nullptr);
-                IDSetSwitch(&FocusMotionSP, nullptr);
-                SendCommand(CMDINIT);
-//                    LOG_WARN("Reset ON.");
-                break;
-            default:
-                LOG_ERROR("Reset default.");
-                FocusMotionSP.s = IPS_ALERT;
-                IDSetSwitch(&FocusMotionSP, "Unknown value for remote control %d", resetIndex);
+                case 0:
+                    FocuserFaultLP.s  = IPS_ALERT;
+                    FocuserFaultL[0].s  = IPS_ALERT;
+                    FocusAbsPosNP.s = IPS_ALERT;
+                    RemoteControlSP.s = IPS_ALERT;
+                    ResetSP.s = IPS_ALERT;
+                    FocusMaxPosNP.s = IPS_ALERT;
+                    FocusSpeedNP.s = IPS_ALERT;
+                    FocusRelPosNP.s = IPS_ALERT;
+                    FocusMotionSP.s = IPS_ALERT;
+                    IDSetLight(&FocuserFaultLP, nullptr);
+                    IDSetNumber(&FocusSpeedNP, nullptr);
+                    IDSetNumber(&FocusAbsPosNP, nullptr);
+                    IDSetNumber(&FocusMaxPosNP, nullptr);
+                    IDSetNumber(&FocusRelPosNP, nullptr);
+                    IDSetSwitch(&FocusMotionSP, nullptr);
+                    IDSetSwitch(&RemoteControlSP, nullptr);
+                    IDSetSwitch(&FocusMotionSP, nullptr);
+                    SendCommand(CMDINIT);
+                    LOG_WARN("Reset issued.");
+                    break;
+                default:
+                    LOG_ERROR("Reset default.");
+                    FocusMotionSP.s = IPS_ALERT;
+                    IDSetSwitch(&FocusMotionSP, "Unknown value for remote control %d", resetIndex);
             }
 
             ResetSP.s = IPS_OK;
@@ -268,6 +273,7 @@ bool RegulusFocuser::ISNewSwitch(const char *dev, const char *name, ISState *sta
 ************************************************************************************/
 bool RegulusFocuser::ISNewNumber(const char *dev, const char *name, double values[], char *names[], int n)
 {
+/*	
     if (dev != nullptr && strcmp(dev, getDeviceName()) == 0)
     {
         if (strcmp(name, "SEEING_SETTINGS") == 0)
@@ -288,6 +294,8 @@ bool RegulusFocuser::ISNewNumber(const char *dev, const char *name, double value
             return true;
         }
     }
+//*/
+
     // Let INDI::Focuser handle any other number properties
     return INDI::Focuser::ISNewNumber(dev, name, values, names, n);
 }
@@ -301,7 +309,6 @@ IPState RegulusFocuser::MoveAbsFocuser(uint32_t targetTicks)
     if( (modbus_f.registry_buffer[REGFAULT] == 1) )
         return IPS_ALERT;
     FocusAbsPosN[0].value = targetTicks;
-
     modbus_f.registry_buffer[REGREQUESTEDPOSITIONLO]=targetTicks&65535;
     modbus_f.registry_buffer[REGREQUESTEDPOSITIONHI]=targetTicks>>16;
     SendCommand(CMDGOTOPOSITION);
@@ -315,11 +322,14 @@ IPState RegulusFocuser::MoveRelFocuser(FocusDirection dir, uint32_t ticks)
 {
     if( (modbus_f.registry_buffer[REGFAULT] == 1) )
         return IPS_ALERT;
+    if(dir == FOCUS_INWARD)
+        SendCommand(CMDRETRACT);
+    else
+        SendCommand(CMDEXTEND);
     modbus_f.registry_buffer[REGREQUESTEDPOSITIONLO]=ticks&65535;
     modbus_f.registry_buffer[REGREQUESTEDPOSITIONHI]=ticks>>16;
     SendCommand(CMDGOTORELATIVE);
     return IPS_OK;
-
 }
 
 /************************************************************************************
@@ -355,7 +365,7 @@ bool RegulusFocuser::SetFocuserBacklashEnabled(bool enabled)
 
 void RegulusFocuser::TimerHit()
 {
-    UpdateValues();
+	UpdateValues();
     SetTimer(TIMERHIT_VALUE);
 }
 
@@ -368,15 +378,15 @@ void RegulusFocuser::UpdateValues()
     FocusAbsPosN[0].max = FocusMaxPosN[0].value;
     IDSetNumber(&FocusAbsPosNP, nullptr);
 
-    FocusMaxPosN[0].value = modbus_f.registry_buffer[REGMAXSTEPSLO]+modbus_f.registry_buffer[REGMAXSTEPSHI]*65536;
+	FocusMaxPosN[0].value = modbus_f.registry_buffer[REGMAXSTEPSLO]+modbus_f.registry_buffer[REGMAXSTEPSHI]*65536;
     IDSetNumber(&FocusMaxPosNP, nullptr);
 
-    FocusSpeedN[0].value = modbus_f.registry_buffer[REGFOCUSERSPEED];
+	FocusSpeedN[0].value = modbus_f.registry_buffer[REGFOCUSERSPEED];
     IDSetNumber(&FocusSpeedNP, nullptr);
 
-    FocusRelPosN[0].value = 0;
+	FocusRelPosN[0].value = 0;
     IDSetNumber(&FocusRelPosNP, nullptr);
-
+    
     if( (modbus_f.registry_buffer[REGDIRECTION] == 1) && (FocusMotionS[FOCUS_INWARD].s == ISS_ON) )
     {
         FocusMotionS[FOCUS_INWARD].s  = ISS_OFF;
@@ -402,7 +412,7 @@ void RegulusFocuser::UpdateValues()
         RemoteControlS[REMOTECONTROL_DISABLE].s = ISS_ON;
         IDSetSwitch(&RemoteControlSP, nullptr);
     }
-
+    
     if( (modbus_f.registry_buffer[REGFAULT] == 1) && (FocuserFaultL[0].s != IPS_ALERT) )
     {
         FocuserFaultLP.s  = IPS_ALERT;
@@ -447,36 +457,36 @@ void RegulusFocuser::UpdateValues()
 
 void RegulusFocuser::SendCommand(int myCommand)
 {
-    printf("SendCommand: %d\n", myCommand);
-    if( (myCommand < 1) && (myCommand > 300))
-    {
-        printf("\n\n\nInvalid command: %d\n\n\n", myCommand);
-        return;
-    }
-    {
-        usleep(MODBUSDELAY);
-        modbus_f.registry_buffer[REGCOMMANDFROMPI]=myCommand;
-        usleep(MODBUSDELAY);
-        modbus_f.WriteRegisters(0,4,0);
-    }
-    while(! CheckCommand(myCommand));
+  printf("SendCommand: %d\n", myCommand);
+  if( (myCommand < 1) && (myCommand > 300))
+  {
+    printf("\n\n\nInvalid command: %d\n\n\n", myCommand);
+    return;
+  }
+  {
+    usleep(MODBUSDELAY);
+    modbus_f.registry_buffer[REGCOMMANDFROMPI]=myCommand;
+    usleep(MODBUSDELAY);
+    modbus_f.WriteRegisters(0,4,0);
+  }
+  while(! CheckCommand(myCommand));
 }
 
 int RegulusFocuser::CheckCommand(int myCommand)
 {
+  {
+    usleep(MODBUSDELAY);
+    modbus_f.ReadRegisters(REGRESPONSETOPI,1,REGRESPONSETOPI);
+    if(modbus_f.registry_buffer[REGRESPONSETOPI] == myCommand)
     {
-        usleep(MODBUSDELAY);
-        modbus_f.ReadRegisters(REGRESPONSETOPI,1,REGRESPONSETOPI);
-        if(modbus_f.registry_buffer[REGRESPONSETOPI] == myCommand)
-        {
-            modbus_f.WriteRegister(REGRESPONSETOPI, 0);
-            return 1;
-        }
-        else
-        {
-            printf("Slave returned invalid response code.\n");
-            return 0;
-        }
+      modbus_f.WriteRegister(REGRESPONSETOPI, 0);
+      return 1;
     }
-    return 0;
+    else
+    {
+      printf("Slave returned invalid response code.\n");
+      return 0;
+    }
+  }
+  return 0;
 }
