@@ -3,8 +3,10 @@
 *.gcode
 *.FCStd1
 
+Documents
 Images/
 ElectronicFocuser-Test-Pi/
 Misc/
 **/*backups/
+*/build/
 

@@ -1,5 +1,0 @@
-Reversable motor direction, driver controlled ??
-
-Limit microstepping - driver controlled ??
-
-Program the STM32 from USB
