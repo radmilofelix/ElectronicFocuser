@@ -3,7 +3,7 @@
 *.gcode
 *.FCStd1
 
-Documents
+Documents/
 Images/
 ElectronicFocuser-Test-Pi/
 Misc/
