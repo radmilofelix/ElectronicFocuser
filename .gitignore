@@ -2,6 +2,7 @@
 *.exe
 *.gcode
 *.FCStd1
+*.FCBak
 
 **/*backups/
 **/build*/
@@ -10,5 +11,7 @@ _images/
 Documents/
 ElectronicFocuser-Test-Pi/
 Misc/
+_old
+
 
 
