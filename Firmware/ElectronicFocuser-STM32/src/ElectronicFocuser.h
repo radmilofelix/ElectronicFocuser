@@ -28,6 +28,8 @@ void LimitSwitchInterrupt();
 void MotorInit();
 void FocuserInit();
 void SyncToZero();
+void GetFlashVar();
+void SetFlashVar(byte flashValue);
 
 #ifdef DEBUG
 void DisplayMenu();
@@ -50,6 +52,8 @@ void DisplayMessageInitCanNotReachZero();
 void DisplayMessageInitStage2();
 void DisplayMessageInitCanNotReachMax();
 void DisplayMessageInitStage3();
+void DisplayMessageFocuserFault();
+void DisplayMessageClearFocuserFault();
 void DisplayMessageInitEarlyZero();
 void DisplayMessageInitStage4();
 void DisplayMessageInitErrorSlipping();
@@ -73,7 +77,7 @@ static int pos = 0;
 bool notInit = true;
 bool interruptTriggered = false;
 bool remoteControlEnabled = true;
-bool focuserFault = true;
+byte focuserFault = 0;
 unsigned long PressStartTime, cycleTime;
 bool longPress=false;
 int longClickCycles=0;

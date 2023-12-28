@@ -11,7 +11,6 @@ FocuserStepper::FocuserStepper()
 	freq=0;
 	halfCycleDuration=10;
 	microstepping=MAXMICROSTEPPING;
-//	microstepping=256;
 	ms1 = 0;
 	ms2 = 0;
 	ms3 = 0;
@@ -35,12 +34,30 @@ FocuserStepper::FocuserStepper()
     digitalWrite(RESET, HIGH);
   }
 
-  if (digitalRead(LIMITSWITCHPIN) )
+//TODO correlate with LIMITSWITCHNORMALLYCLOSED definition, limit switch should drive an interrupt
+//  if (digitalRead(LIMITSWITCHPIN) )
+//    stepPosition=0;
+//  else
+//    stepPosition=maxSteps;
+//    ValidateMicrostepMode();
+//}
+
+#ifdef LIMITSWITCHNORMALLYCLOSED
+  if(!digitalRead(LIMITSWITCHPIN))
+#else // Switch normally open
+  if(digitalRead(LIMITSWITCHPIN))
+#endif
+  {
     stepPosition=0;
+  }
   else
+  {
     stepPosition=maxSteps;
     ValidateMicrostepMode();
+  }
 }
+
+
 
 FocuserStepper::~FocuserStepper()
 {

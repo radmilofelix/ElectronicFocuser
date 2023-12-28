@@ -23,13 +23,14 @@
 #define DRIVERSTSPIN220 3
 #define DRIVERSTSPIN820 4
 #define LIMITSWITCHPIN PB12
-//#define LIMITSWITCHNORMALLYCLOSED
+#define LIMITSWITCHNORMALLYCLOSED
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////  Enable one of the focuser models
-#define SCT_MCT
+//#define SCT_MCT
 //#define PHOTON_254
+#define RACK_PINION_LO
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #ifdef SCT_MCT
@@ -37,6 +38,9 @@
 ////// Crayford 2 " Focuser for SCT & MCT - parameters
  #define FOCUSERTRAVEL 17.5 // mm
  #define FOCUSERTRAVELPER360 13 // mm
+ #define GEARRATIO 1 // Direct drive
+ #define MOTORRESOLUTION 1.8 // degrees per step
+ #define MAXMICROSTEPPING 256
 // UnscrewToRetract
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #endif
@@ -45,23 +49,25 @@
 ////// Crayford 2 " Focuser for Newt. Photon 254 f:4 - parameters
  #define FOCUSERTRAVEL 50 // mm
  #define FOCUSERTRAVELPER360 13 // mm
+ #define GEARRATIO 1 // Direct drive
+ #define MOTORRESOLUTION 1.8 // degrees per step
+ #define MAXMICROSTEPPING 256
 // UnscrewToRetract
 #endif
 
+#ifdef RACK_PINION_LO
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////// Motor parameters
-// #define MOTORRESOLUTION 0.9 // degrees per step
+////// Rack & Pinion low profile 2" focuser for Newtonians - parameters
+ #define FOCUSERTRAVEL  23 // mm
+ //#define FOCUSERTRAVEL  23 // mm
+ #define FOCUSERTRAVELPER360 23 // mm
+ #define GEARRATIO 100 // Direct drive
  #define MOTORRESOLUTION 1.8 // degrees per step
-
-// #define MAXMICROSTEPPING 128
  #define MAXMICROSTEPPING 256
-
- #define GEARRATIO 1 // Direct drive
- //#define GEARRATIO 100 // Gearbox ratio
+// UnscrewToRetract
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#endif
 
-//#define MAXSTEPS 131000
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 class FocuserStepper
