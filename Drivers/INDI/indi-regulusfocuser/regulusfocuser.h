@@ -67,25 +67,11 @@ class RegulusFocuser : public INDI::Focuser
         double internalTicks { 0 };
         double initTicks { 0 };
 
-/*
-        // Seeing in arcseconds
-        INumberVectorProperty SeeingNP;
-        INumber SeeingN[1];
-
-        // FWHM to be used by CCD driver to draw 'fuzzy' stars
-        INumberVectorProperty FWHMNP;
-        INumber FWHMN[1];
-
-        // Temperature in celsius degrees
-        INumberVectorProperty TemperatureNP;
-        INumber TemperatureN[1];
-//*/
-
 	enum
 	{
 		REMOTECONTROL_ENABLE,
 		REMOTECONTROL_DISABLE,
-                REMOTECONTROL_COUNT
+        REMOTECONTROL_COUNT
 	};
         ISwitchVectorProperty RemoteControlSP;
         ISwitch RemoteControlS[REMOTECONTROL_COUNT];

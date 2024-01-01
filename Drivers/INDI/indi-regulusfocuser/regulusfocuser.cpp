@@ -100,31 +100,16 @@ bool RegulusFocuser::initProperties()
     IUFillLight(&FocuserFaultL[0], "FocuserFault", "", IPS_IDLE);
     IUFillLightVector(&FocuserFaultLP, FocuserFaultL, 1, getDeviceName(), "FocuserFault", "", MAIN_CONTROL_TAB, IPS_IDLE);
 
-/*
-    IUFillNumber(&SeeingN[0], "SIM_SEEING", "arcseconds", "%4.2f", 0, 60, 0, 3.5);
-    IUFillNumberVector(&SeeingNP, SeeingN, 1, getDeviceName(), "SEEING_SETTINGS", "Seeing", MAIN_CONTROL_TAB, IP_RW, 60,
-                       IPS_IDLE);
-
-    IUFillNumber(&FWHMN[0], "SIM_FWHM", "arcseconds", "%4.2f", 0, 60, 0, 7.5);
-    IUFillNumberVector(&FWHMNP, FWHMN, 1, getDeviceName(), "FWHM", "FWHM", MAIN_CONTROL_TAB, IP_RO, 60, IPS_IDLE);
-
-    IUFillNumber(&TemperatureN[0], "TEMPERATURE", "Celsius", "%6.2f", -50., 70., 0., 0.);
-    IUFillNumberVector(&TemperatureNP, TemperatureN, 1, getDeviceName(), "FOCUS_TEMPERATURE", "Temperature",
-                       MAIN_CONTROL_TAB, IP_RW, 0, IPS_IDLE);
-//*/
-
     IUFillNumber(&FocusMaxPosN[0], "FOCUS_MAX_VALUE", "Steps", "%.f", 1, 150000, 1, 50000);
     IUFillNumberVector(&FocusMaxPosNP, FocusMaxPosN, 1, getDeviceName(), "FOCUS_MAX", "Max. Position",
                        MAIN_CONTROL_TAB, IP_RO, 60, IPS_OK);
-
-//    initTicks = sqrt(FWHMN[0].value - SeeingN[0].value) / 0.75;
 
     FocusSpeedN[0].min   = 1;
     FocusSpeedN[0].max   = 15;
     FocusSpeedN[0].step  = 1;
     FocusSpeedN[0].value = 1;
 
-    FocusAbsPosN[0].max = 150000;
+    FocusAbsPosN[0].max = 5000000;
     FocusAbsPosN[0].min = 0;
     FocusAbsPosN[0].value = 0;
 
@@ -145,22 +130,12 @@ bool RegulusFocuser::updateProperties()
         defineProperty(&RemoteControlSP);
         defineProperty(&ResetSP);
         defineProperty(&FocuserFaultLP);
-/*        
-        defineProperty(&SeeingNP);
-        defineProperty(&FWHMNP);
-        defineProperty(&TemperatureNP);
-//*/
     }
     else
     {
         deleteProperty(RemoteControlSP.name);
         deleteProperty(ResetSP.name);
         deleteProperty(FocuserFaultLP.name);
-/*
-        deleteProperty(SeeingNP.name);
-        deleteProperty(FWHMNP.name);
-        deleteProperty(TemperatureNP.name);
-//*/
     }
 
     return true;
@@ -190,7 +165,7 @@ bool RegulusFocuser::ISNewSwitch(const char *dev, const char *name, ISState *sta
 //                    LOG_ERROR("FOCUS outward.");
                     break;
                 default:
-                    LOG_ERROR("FOCUS default.");
+                    LOG_ERROR("FOCUS unknown motion direction.");
                     FocusMotionSP.s = IPS_ALERT;
                     IDSetSwitch(&FocusMotionSP, "Unknown motion direction %d", motionIndex);
             }
@@ -215,7 +190,7 @@ bool RegulusFocuser::ISNewSwitch(const char *dev, const char *name, ISState *sta
                     LOG_WARN("Remote OFF.");
                     break;
                 default:
-                    LOG_WARN("RemoteControl default.");
+                    LOG_WARN("RemoteControl unknown status.");
                     FocusMotionSP.s = IPS_ALERT;
                     IDSetSwitch(&FocusMotionSP, "Unknown value for remote control %d", remoteControlIndex);
             }
@@ -254,7 +229,7 @@ bool RegulusFocuser::ISNewSwitch(const char *dev, const char *name, ISState *sta
                     LOG_WARN("Reset issued.");
                     break;
                 default:
-                    LOG_ERROR("Reset default.");
+                    LOG_ERROR("Reset unknown status.");
                     FocusMotionSP.s = IPS_ALERT;
                     IDSetSwitch(&FocusMotionSP, "Unknown value for remote control %d", resetIndex);
             }
@@ -273,29 +248,6 @@ bool RegulusFocuser::ISNewSwitch(const char *dev, const char *name, ISState *sta
 ************************************************************************************/
 bool RegulusFocuser::ISNewNumber(const char *dev, const char *name, double values[], char *names[], int n)
 {
-/*	
-    if (dev != nullptr && strcmp(dev, getDeviceName()) == 0)
-    {
-        if (strcmp(name, "SEEING_SETTINGS") == 0)
-        {
-            SeeingNP.s = IPS_OK;
-            IUUpdateNumber(&SeeingNP, values, names, n);
-
-            IDSetNumber(&SeeingNP, nullptr);
-            return true;
-        }
-
-        if (strcmp(name, "FOCUS_TEMPERATURE") == 0)
-        {
-            TemperatureNP.s = IPS_OK;
-            IUUpdateNumber(&TemperatureNP, values, names, n);
-
-            IDSetNumber(&TemperatureNP, nullptr);
-            return true;
-        }
-    }
-//*/
-
     // Let INDI::Focuser handle any other number properties
     return INDI::Focuser::ISNewNumber(dev, name, values, names, n);
 }
@@ -374,12 +326,12 @@ void RegulusFocuser::UpdateValues()
     usleep(MODBUSDELAY);
     modbus_f.ReadRegisters(0,NUMBEROFREGISTERS,0);
 
+	FocusMaxPosN[0].value = modbus_f.registry_buffer[REGMAXSTEPSLO]+modbus_f.registry_buffer[REGMAXSTEPSHI]*65536;
+    IDSetNumber(&FocusMaxPosNP, nullptr);
+
     FocusAbsPosN[0].value = modbus_f.registry_buffer[REGSTEPPOSITIONLO]+modbus_f.registry_buffer[REGSTEPPOSITIONHI]*65536;
     FocusAbsPosN[0].max = FocusMaxPosN[0].value;
     IDSetNumber(&FocusAbsPosNP, nullptr);
-
-	FocusMaxPosN[0].value = modbus_f.registry_buffer[REGMAXSTEPSLO]+modbus_f.registry_buffer[REGMAXSTEPSHI]*65536;
-    IDSetNumber(&FocusMaxPosNP, nullptr);
 
 	FocusSpeedN[0].value = modbus_f.registry_buffer[REGFOCUSERSPEED];
     IDSetNumber(&FocusSpeedNP, nullptr);
@@ -484,6 +436,7 @@ int RegulusFocuser::CheckCommand(int myCommand)
     }
     else
     {
+		LOG_ERROR("Invalid response from device!");
       printf("Slave returned invalid response code.\n");
       return 0;
     }

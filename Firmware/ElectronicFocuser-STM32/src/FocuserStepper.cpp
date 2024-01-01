@@ -34,14 +34,6 @@ FocuserStepper::FocuserStepper()
     digitalWrite(RESET, HIGH);
   }
 
-//TODO correlate with LIMITSWITCHNORMALLYCLOSED definition, limit switch should drive an interrupt
-//  if (digitalRead(LIMITSWITCHPIN) )
-//    stepPosition=0;
-//  else
-//    stepPosition=maxSteps;
-//    ValidateMicrostepMode();
-//}
-
 #ifdef LIMITSWITCHNORMALLYCLOSED
   if(!digitalRead(LIMITSWITCHPIN))
 #else // Switch normally open

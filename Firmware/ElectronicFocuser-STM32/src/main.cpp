@@ -26,7 +26,7 @@ void setup()
 
     delay (100);
     modbus_f.begin(19200);
-    Serial2.begin(115200);
+    Serial2.begin(19200);
     for(int i = 0; i < 200; i++)
     {
         Serial2.println();
@@ -62,6 +62,9 @@ void setup()
     button.attachLongPressStop(PressStop);
     fstepper.SelectMicrostepMode(fstepper.microstepping);
     lostSteps = 0;
+
+// Reset flash for debug purposes
+    SetFlashVar(0);
 
     GetFlashVar();
     if(focuserFault)
@@ -1049,7 +1052,7 @@ void ModbusPoll()
 
 void CommandProcessor()
 {
-    if( !modbus_f.dataBuffer[REGCOMMANDFROMPI] || !focuserFault )
+    if( !modbus_f.dataBuffer[REGCOMMANDFROMPI] || focuserFault )
     {
         return;
     }
