@@ -32,9 +32,15 @@ static std::unique_ptr<RegulusFocuser> regulusFocuser(new RegulusFocuser());
 /************************************************************************************
  *
 ************************************************************************************/
-RegulusFocuser::RegulusFocuser() : modbus_f("/dev/ttyUSB0", 19200, 'N', 8, 1)
+RegulusFocuser::RegulusFocuser() : modbus_f("/dev/indi-regulusfocuser", 19200, 'N', 8, 1)
+//RegulusFocuser::RegulusFocuser() : modbus_f("/dev/ttyUSB0", 19200, 'N', 8, 1)
 {
     FI::SetCapability(FOCUSER_CAN_ABS_MOVE | FOCUSER_CAN_REL_MOVE | FOCUSER_HAS_VARIABLE_SPEED);
+	#ifdef HASGEARBOX
+		gearboxFactor = GEARBOXMULTIPLIER;
+    #else
+		gearboxFactor = 1;
+    #endif
 }
 
 /************************************************************************************
@@ -88,17 +94,15 @@ bool RegulusFocuser::initProperties()
     INDI::Focuser::initProperties();
 
 
-    IUFillSwitch(&RemoteControlS[REMOTECONTROL_ENABLE], "Enabled", "Enabled", ISS_ON);
-    IUFillSwitch(&RemoteControlS[REMOTECONTROL_DISABLE], "Disabled", "Disabled", ISS_OFF);
-    IUFillSwitchVector(&RemoteControlSP, RemoteControlS, REMOTECONTROL_COUNT, getDeviceName(),
-                    "RemoteCtrl", "RemoteCtrl", MAIN_CONTROL_TAB, IP_RW, ISR_1OFMANY, 60, IPS_IDLE);
+    RemoteControlSP[REMOTECONTROL_ENABLE].fill("Enabled", "Enabled", ISS_OFF);
+    RemoteControlSP[REMOTECONTROL_DISABLE].fill("Disabled", "Disabled", ISS_ON);
+    RemoteControlSP.fill(getDeviceName(), "RemoteCtrl", "RemoteCtrl", MAIN_CONTROL_TAB, IP_RW, ISR_1OFMANY, 60, IPS_IDLE);
 
-    IUFillSwitch(&ResetS[0], "Reset", "Reset", ISS_OFF);
-    IUFillSwitchVector(&ResetSP, ResetS, 1, getDeviceName(),
-                    "Reset", "Reset", MAIN_CONTROL_TAB, IP_RW, ISR_1OFMANY, 60, IPS_IDLE);
+    ResetSP[0].fill("Reset", "Reset", ISS_OFF);
+    ResetSP.fill(getDeviceName(), "Reset", "Reset", MAIN_CONTROL_TAB, IP_RW, ISR_1OFMANY, 60, IPS_IDLE);
 
-    IUFillLight(&FocuserFaultL[0], "FocuserFault", "", IPS_IDLE);
-    IUFillLightVector(&FocuserFaultLP, FocuserFaultL, 1, getDeviceName(), "FocuserFault", "", MAIN_CONTROL_TAB, IPS_IDLE);
+    FocuserFaultLP[0].fill("FocuserFault", "", IPS_IDLE);
+    FocuserFaultLP.fill(getDeviceName(), "FocuserFault", "", MAIN_CONTROL_TAB, IPS_IDLE);
 
     IUFillNumber(&FocusMaxPosN[0], "FOCUS_MAX_VALUE", "Steps", "%.f", 1, 150000, 1, 50000);
     IUFillNumberVector(&FocusMaxPosNP, FocusMaxPosN, 1, getDeviceName(), "FOCUS_MAX", "Max. Position",
@@ -115,6 +119,9 @@ bool RegulusFocuser::initProperties()
 
     internalTicks = FocusAbsPosN[0].value;
 
+//	SetFocuserBacklashEnabled(true);
+//	SetFocuserBacklash(5000);
+
     return true;
 }
 
@@ -127,15 +134,15 @@ bool RegulusFocuser::updateProperties()
 
     if (isConnected())
     {
-        defineProperty(&RemoteControlSP);
-        defineProperty(&ResetSP);
-        defineProperty(&FocuserFaultLP);
+        defineProperty(RemoteControlSP);
+        defineProperty(ResetSP);
+        defineProperty(FocuserFaultLP);
     }
     else
     {
-        deleteProperty(RemoteControlSP.name);
-        deleteProperty(ResetSP.name);
-        deleteProperty(FocuserFaultLP.name);
+        deleteProperty(RemoteControlSP);
+        deleteProperty(ResetSP);
+        deleteProperty(FocuserFaultLP);
     }
 
     return true;
@@ -174,10 +181,10 @@ bool RegulusFocuser::ISNewSwitch(const char *dev, const char *name, ISState *sta
             return true;
         }
 
-        if ( (strcmp(RemoteControlSP.name, name) == 0) && (modbus_f.registry_buffer[REGFAULT] == 0) )
+        if ( (strcmp(RemoteControlSP.getName(), name) == 0) && (modbus_f.registry_buffer[REGFAULT] == 0) )
         {
-            IUUpdateSwitch(&RemoteControlSP, states, names, n);
-            int remoteControlIndex = IUFindOnSwitchIndex(&RemoteControlSP);
+			RemoteControlSP.update(states, names, n);
+            int remoteControlIndex = RemoteControlSP.findOnSwitchIndex();
 
             switch(remoteControlIndex)
             {
@@ -195,47 +202,58 @@ bool RegulusFocuser::ISNewSwitch(const char *dev, const char *name, ISState *sta
                     IDSetSwitch(&FocusMotionSP, "Unknown value for remote control %d", remoteControlIndex);
             }
 
-            RemoteControlSP.s = IPS_OK;
-            IDSetSwitch(&RemoteControlSP, nullptr);
+            RemoteControlSP.setState(IPS_OK);
+            RemoteControlSP.apply();
             return true;
         }
 
-        if (strcmp(ResetSP.name, name) == 0)
+        if (strcmp(ResetSP.getName(), name) == 0)
         {
-            IUUpdateSwitch(&ResetSP, states, names, n);
-            int resetIndex = IUFindOnSwitchIndex(&ResetSP);
+			ResetSP.update(states, names, n);
+            int resetIndex = ResetSP.findOnSwitchIndex();
 
             switch(resetIndex)
             {
                 case 0:
-                    FocuserFaultLP.s  = IPS_ALERT;
-                    FocuserFaultL[0].s  = IPS_ALERT;
-                    FocusAbsPosNP.s = IPS_ALERT;
-                    RemoteControlSP.s = IPS_ALERT;
-                    ResetSP.s = IPS_ALERT;
-                    FocusMaxPosNP.s = IPS_ALERT;
-                    FocusSpeedNP.s = IPS_ALERT;
-                    FocusRelPosNP.s = IPS_ALERT;
-                    FocusMotionSP.s = IPS_ALERT;
-                    IDSetLight(&FocuserFaultLP, nullptr);
-                    IDSetNumber(&FocusSpeedNP, nullptr);
-                    IDSetNumber(&FocusAbsPosNP, nullptr);
-                    IDSetNumber(&FocusMaxPosNP, nullptr);
-                    IDSetNumber(&FocusRelPosNP, nullptr);
-                    IDSetSwitch(&FocusMotionSP, nullptr);
-                    IDSetSwitch(&RemoteControlSP, nullptr);
-                    IDSetSwitch(&FocusMotionSP, nullptr);
-                    SendCommand(CMDINIT);
-                    LOG_WARN("Reset issued.");
+					RemoteControlSP.setState(IPS_ALERT);
+					FocuserFaultLP[0].setState(IPS_ALERT);
+					ResetSP.setState(IPS_BUSY);
+					RemoteControlSP.apply();
+					ResetSP.apply();
+
+					FocusAbsPosNP.s = IPS_ALERT;
+					FocusMaxPosNP.s = IPS_ALERT;
+					FocusSpeedNP.s = IPS_ALERT;
+					FocusRelPosNP.s = IPS_ALERT;
+					FocusMotionSP.s = IPS_ALERT;
+					IDSetNumber(&FocusSpeedNP, nullptr);
+					IDSetNumber(&FocusAbsPosNP, nullptr);
+					IDSetNumber(&FocusMaxPosNP, nullptr);
+					IDSetNumber(&FocusRelPosNP, nullptr);
+					IDSetSwitch(&FocusMotionSP, nullptr);
+					if( FocuserFaultLP.getState() != IPS_ALERT )
+					{
+						FocuserFaultLP.setState(IPS_ALERT);
+						FocuserFaultLP.apply();
+						SendCommand(CMDINIT);
+						LOG_WARN("Reset issued.");
+					}
+					else
+					{
+						ResetSP.setState(IPS_ALERT);
+						ResetSP.apply();
+						LOG_ERROR("Can not reset. Device is in fault state.");
+						return false;
+					}
                     break;
                 default:
                     LOG_ERROR("Reset unknown status.");
                     FocusMotionSP.s = IPS_ALERT;
+                    IDSetSwitch(&FocusMotionSP, nullptr);
                     IDSetSwitch(&FocusMotionSP, "Unknown value for remote control %d", resetIndex);
             }
-
-            ResetSP.s = IPS_OK;
-            IDSetSwitch(&ResetSP, nullptr);
+//            ResetSP.setState(IPS_OK);
+//            ResetSP.apply();
             return true;
         }
     }
@@ -260,7 +278,9 @@ IPState RegulusFocuser::MoveAbsFocuser(uint32_t targetTicks)
 {
     if( (modbus_f.registry_buffer[REGFAULT] == 1) )
         return IPS_ALERT;
+        
     FocusAbsPosN[0].value = targetTicks;
+    targetTicks *= gearboxFactor;
     modbus_f.registry_buffer[REGREQUESTEDPOSITIONLO]=targetTicks&65535;
     modbus_f.registry_buffer[REGREQUESTEDPOSITIONHI]=targetTicks>>16;
     SendCommand(CMDGOTOPOSITION);
@@ -273,11 +293,20 @@ IPState RegulusFocuser::MoveAbsFocuser(uint32_t targetTicks)
 IPState RegulusFocuser::MoveRelFocuser(FocusDirection dir, uint32_t ticks)
 {
     if( (modbus_f.registry_buffer[REGFAULT] == 1) )
+    {
         return IPS_ALERT;
+	}
     if(dir == FOCUS_INWARD)
+    {
         SendCommand(CMDRETRACT);
+	}
     else
+    {
         SendCommand(CMDEXTEND);
+	}
+
+	ticks *= gearboxFactor;
+
     modbus_f.registry_buffer[REGREQUESTEDPOSITIONLO]=ticks&65535;
     modbus_f.registry_buffer[REGREQUESTEDPOSITIONHI]=ticks>>16;
     SendCommand(CMDGOTORELATIVE);
@@ -326,10 +355,10 @@ void RegulusFocuser::UpdateValues()
     usleep(MODBUSDELAY);
     modbus_f.ReadRegisters(0,NUMBEROFREGISTERS,0);
 
-	FocusMaxPosN[0].value = modbus_f.registry_buffer[REGMAXSTEPSLO]+modbus_f.registry_buffer[REGMAXSTEPSHI]*65536;
+	FocusMaxPosN[0].value = (modbus_f.registry_buffer[REGMAXSTEPSLO]+modbus_f.registry_buffer[REGMAXSTEPSHI]*65536) / gearboxFactor;
     IDSetNumber(&FocusMaxPosNP, nullptr);
 
-    FocusAbsPosN[0].value = modbus_f.registry_buffer[REGSTEPPOSITIONLO]+modbus_f.registry_buffer[REGSTEPPOSITIONHI]*65536;
+    FocusAbsPosN[0].value = (modbus_f.registry_buffer[REGSTEPPOSITIONLO]+modbus_f.registry_buffer[REGSTEPPOSITIONHI]*65536) / gearboxFactor;
     FocusAbsPosN[0].max = FocusMaxPosN[0].value;
     IDSetNumber(&FocusAbsPosNP, nullptr);
 
@@ -341,68 +370,72 @@ void RegulusFocuser::UpdateValues()
     
     if( (modbus_f.registry_buffer[REGDIRECTION] == 1) && (FocusMotionS[FOCUS_INWARD].s == ISS_ON) )
     {
-        FocusMotionS[FOCUS_INWARD].s  = ISS_OFF;
+        FocusMotionS[FOCUS_INWARD].s = ISS_OFF;
         FocusMotionS[FOCUS_OUTWARD].s = ISS_ON;
         IDSetSwitch(&FocusMotionSP, nullptr);
     }
+
     if( (modbus_f.registry_buffer[REGDIRECTION] == 2) && (FocusMotionS[FOCUS_OUTWARD].s  == ISS_ON) )
     {
-        FocusMotionS[FOCUS_INWARD].s  = ISS_ON;
+        FocusMotionS[FOCUS_INWARD].s = ISS_ON;
         FocusMotionS[FOCUS_OUTWARD].s = ISS_OFF;
         IDSetSwitch(&FocusMotionSP, nullptr);
     }
 
-    if( (modbus_f.registry_buffer[REGREMOTECONTROL] == 1) && (RemoteControlS[REMOTECONTROL_ENABLE].s  == ISS_OFF) )
+    if( (modbus_f.registry_buffer[REGREMOTECONTROL] == 1) && (RemoteControlSP[REMOTECONTROL_ENABLE].getState()  == ISS_OFF) )
     {
-        RemoteControlS[REMOTECONTROL_ENABLE].s  = ISS_ON;
-        RemoteControlS[REMOTECONTROL_DISABLE].s = ISS_OFF;
-        IDSetSwitch(&RemoteControlSP, nullptr);
+        RemoteControlSP[REMOTECONTROL_ENABLE].setState(ISS_ON);
+        RemoteControlSP[REMOTECONTROL_DISABLE].setState(ISS_OFF);
+        RemoteControlSP.apply();
     }
-    if( (modbus_f.registry_buffer[REGREMOTECONTROL] == 0) && (RemoteControlS[REMOTECONTROL_ENABLE].s  == ISS_ON) )
+
+    if( (modbus_f.registry_buffer[REGREMOTECONTROL] == 0) && (RemoteControlSP[REMOTECONTROL_ENABLE].getState()  == ISS_ON) )
     {
-        RemoteControlS[REMOTECONTROL_ENABLE].s  = ISS_OFF;
-        RemoteControlS[REMOTECONTROL_DISABLE].s = ISS_ON;
-        IDSetSwitch(&RemoteControlSP, nullptr);
+        RemoteControlSP[REMOTECONTROL_ENABLE].setState(ISS_OFF);
+        RemoteControlSP[REMOTECONTROL_DISABLE].setState(ISS_ON);
+        RemoteControlSP.apply();
     }
     
-    if( (modbus_f.registry_buffer[REGFAULT] == 1) && (FocuserFaultL[0].s != IPS_ALERT) )
+    if( (modbus_f.registry_buffer[REGFAULT] == 1) && (FocuserFaultLP[0].getState() != IPS_ALERT) )
     {
-        FocuserFaultLP.s  = IPS_ALERT;
-        FocuserFaultL[0].s  = IPS_ALERT;
+        FocuserFaultLP.setState(IPS_ALERT);
+        FocuserFaultLP[0].setState(IPS_ALERT);
+        RemoteControlSP.setState(IPS_ALERT);
+        ResetSP.setState(IPS_ALERT);
+        FocuserFaultLP.apply();
+        ResetSP.apply();
+        RemoteControlSP.apply();
+
         FocusAbsPosNP.s = IPS_ALERT;
-        RemoteControlSP.s = IPS_ALERT;
-        ResetSP.s = IPS_ALERT;
         FocusMaxPosNP.s = IPS_ALERT;
         FocusSpeedNP.s = IPS_ALERT;
         FocusRelPosNP.s = IPS_ALERT;
         FocusMotionSP.s = IPS_ALERT;
-        IDSetLight(&FocuserFaultLP, nullptr);
         IDSetNumber(&FocusSpeedNP, nullptr);
         IDSetNumber(&FocusAbsPosNP, nullptr);
         IDSetNumber(&FocusMaxPosNP, nullptr);
         IDSetNumber(&FocusRelPosNP, nullptr);
         IDSetSwitch(&FocusMotionSP, nullptr);
-        IDSetSwitch(&RemoteControlSP, nullptr);
-        IDSetSwitch(&FocusMotionSP, nullptr);
     }
-    if( (modbus_f.registry_buffer[REGFAULT] == 0) && (FocuserFaultL[0].s == IPS_ALERT) )
+    if( (modbus_f.registry_buffer[REGFAULT] == 0) && (FocuserFaultLP[0].getState() == IPS_ALERT) )
     {
-        FocuserFaultLP.s  = IPS_OK;
-        FocuserFaultL[0].s  = IPS_OK;
+        FocuserFaultLP.setState(IPS_OK);
+        FocuserFaultLP[0].setState(IPS_OK);
+        RemoteControlSP.setState(IPS_OK);
+        ResetSP.setState(IPS_OK);
+        FocuserFaultLP.apply();
+        ResetSP.apply();
+        RemoteControlSP.apply();
+
         FocusAbsPosNP.s = IPS_OK;
-        RemoteControlSP.s = IPS_OK;
-        ResetSP.s = IPS_OK;
         FocusMaxPosNP.s = IPS_OK;
         FocusSpeedNP.s = IPS_OK;
         FocusRelPosNP.s = IPS_OK;
         FocusMotionSP.s = IPS_OK;
-        IDSetLight(&FocuserFaultLP, nullptr);
         IDSetNumber(&FocusSpeedNP, nullptr);
         IDSetNumber(&FocusAbsPosNP, nullptr);
         IDSetNumber(&FocusMaxPosNP, nullptr);
         IDSetNumber(&FocusRelPosNP, nullptr);
-        IDSetSwitch(&FocusMotionSP, nullptr);
-        IDSetSwitch(&RemoteControlSP, nullptr);
         IDSetSwitch(&FocusMotionSP, nullptr);
     }
 }

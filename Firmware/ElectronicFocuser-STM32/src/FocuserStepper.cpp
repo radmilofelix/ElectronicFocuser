@@ -20,7 +20,7 @@ FocuserStepper::FocuserStepper()
   maxSteps = maxStepsAbsolute;
   stepTarget = 0;
   stepRate = 10000;
-	motorEnable = false;
+    motorEnable = false;
   speedIndex = 14;
   optimalSpeed = 13 - MOTORRESOLUTION / 0.9;
 	//motorDriver = DRIVER_A4988;

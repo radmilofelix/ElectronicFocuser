@@ -37,6 +37,11 @@
 #define TIMERHIT_VALUE 1000 // milliseconds
 #define MODBUSDELAY	20000 // milliseconds
 
+#define HASGEARBOX
+#ifdef HASGEARBOX
+#define GEARBOXMULTIPLIER 10
+#endif
+
 class RegulusFocuser : public INDI::Focuser
 {
     public:
@@ -66,6 +71,7 @@ class RegulusFocuser : public INDI::Focuser
     private:
         double internalTicks { 0 };
         double initTicks { 0 };
+        int gearboxFactor;
 
 	enum
 	{
@@ -73,12 +79,8 @@ class RegulusFocuser : public INDI::Focuser
 		REMOTECONTROL_DISABLE,
         REMOTECONTROL_COUNT
 	};
-        ISwitchVectorProperty RemoteControlSP;
-        ISwitch RemoteControlS[REMOTECONTROL_COUNT];
 
-        ISwitchVectorProperty ResetSP;
-        ISwitch ResetS[1];
-
-        ILight FocuserFaultL[1];
-        ILightVectorProperty FocuserFaultLP;	
+	INDI::PropertyLight FocuserFaultLP {1};
+	INDI::PropertySwitch ResetSP {1};
+	INDI::PropertySwitch RemoteControlSP {2};
 };
